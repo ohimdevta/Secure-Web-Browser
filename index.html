@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="midnight">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NovaBrowser — A next-generation web browser with futuristic UI, AI assistant, and offline games">
+  <title>NovaBrowser — Next-Gen Web Browser</title>
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/core.css">
+  <link rel="stylesheet" href="css/browser.css">
+  <link rel="stylesheet" href="css/tabs.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+  <link rel="stylesheet" href="css/ai-assistant.css">
+  <link rel="stylesheet" href="css/games.css">
+  <link rel="stylesheet" href="css/themes.css">
+</head>
+<body>
+  <div class="nova-browser" id="novaBrowser">
+    
+    <!-- Background Effects -->
+    <div class="nova-bg-effects">
+      <div class="nova-bg-orb nova-bg-orb--purple"></div>
+      <div class="nova-bg-orb nova-bg-orb--teal"></div>
+      <div class="nova-bg-orb nova-bg-orb--pink"></div>
+      <div class="nova-bg-grid"></div>
+    </div>
+
+    <!-- Loading Bar -->
+    <div class="nova-loading-bar" id="loadingBar" style="width: 0%; display: none;"></div>
+
+    <!-- Title Bar -->
+    <div class="nova-titlebar">
+      <div class="nova-titlebar__logo">
+        <div class="nova-titlebar__logo-icon"></div>
+        <span class="gradient-text">NovaBrowser</span>
+        <span style="color: var(--nova-text-tertiary); font-size: 10px; font-weight: 400;">v1.0</span>
+      </div>
+      <div class="nova-titlebar__controls">
+        <button class="nova-titlebar__btn nova-titlebar__btn--minimize" data-tooltip="Minimize" id="winMinBtn"></button>
+        <button class="nova-titlebar__btn nova-titlebar__btn--maximize" data-tooltip="Maximize" id="winMaxBtn"></button>
+        <button class="nova-titlebar__btn nova-titlebar__btn--close" data-tooltip="Close" id="winCloseBtn"></button>
+      </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="nova-tabbar" id="tabBar">
+      <div class="nova-tabbar__scroll" id="tabScroll">
+        <!-- Tabs inserted dynamically -->
+      </div>
+      <button class="nova-tabbar__new" id="newTabBtn" data-tooltip="New Tab (Ctrl+T)">+</button>
+      <button class="nova-btn nova-btn-icon nova-tabbar__3d-toggle" id="toggle3DTabs" data-tooltip="3D Tab View">
+        ⊞
+      </button>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="nova-navbar" id="navBar">
+      <div class="nova-navbar__nav-btns">
+        <button class="nova-navbar__btn nova-navbar__btn--disabled" id="backBtn" data-tooltip="Back">←</button>
+        <button class="nova-navbar__btn nova-navbar__btn--disabled" id="forwardBtn" data-tooltip="Forward">→</button>
+        <button class="nova-navbar__btn" id="refreshBtn" data-tooltip="Refresh">⟳</button>
+        <button class="nova-navbar__btn" id="homeBtn" data-tooltip="Home">⌂</button>
+      </div>
+
+      <div class="nova-urlbar" id="urlBar">
+        <span class="nova-urlbar__security nova-urlbar__security--secure" id="securityIcon">🔒</span>
+        <input 
+          type="text" 
+          class="nova-urlbar__input" 
+          id="urlInput" 
+          placeholder="Search or enter URL — Ctrl+L to focus"
+          spellcheck="false"
+          autocomplete="off"
+        >
+        <div class="nova-urlbar__actions">
+          <button class="nova-urlbar__action" id="bookmarkBtn" data-tooltip="Bookmark">☆</button>
+          <button class="nova-urlbar__action" id="voiceSearchBtn" data-tooltip="Voice Search">🎤</button>
+        </div>
+      </div>
+
+      <div class="nova-navbar__actions">
+        <button class="nova-navbar__btn" id="focusModeBtn" data-tooltip="Focus Mode (F11)">👁</button>
+        <button class="nova-navbar__btn" id="splitViewBtn" data-tooltip="Split View">⊟</button>
+        <button class="nova-navbar__btn" id="aiAssistantBtn" data-tooltip="AI Assistant (Ctrl+J)">✨</button>
+        <button class="nova-navbar__btn" id="settingsBtn" data-tooltip="Settings">⚙</button>
+        <button class="nova-navbar__btn" id="menuBtn" data-tooltip="Menu">☰</button>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="nova-content" id="contentArea">
+
+      <!-- Webview Container — Real Chromium Renderer Processes -->
+      <div class="nova-webview-container" id="webviewContainer" style="display:none; position:absolute; top:0; left:0; right:0; bottom:0; z-index:1;">
+        <!-- Webviews are created dynamically per tab -->
+      </div>
+      
+      <!-- New Tab Page -->
+      <div class="nova-newtab nova-newtab--active" id="newTabPage">
+        <div class="nova-newtab__hero">
+          <div class="nova-newtab__logo"></div>
+          <h1 class="nova-newtab__title gradient-text">NovaBrowser</h1>
+          <p class="nova-newtab__subtitle">Your gateway to the future of browsing</p>
+        </div>
+
+        <div class="nova-newtab__search">
+          <div class="nova-newtab__searchbar">
+            <span class="nova-newtab__searchbar-icon">🔍</span>
+            <input 
+              type="text" 
+              class="nova-newtab__searchbar-input" 
+              id="searchInput"
+              placeholder="Search the web or enter a URL..."
+            >
+            <div class="nova-newtab__searchbar-actions">
+              <button class="nova-newtab__searchbar-btn" id="searchVoiceBtn" data-tooltip="Voice Search">🎤</button>
+              <button class="nova-newtab__searchbar-btn" id="searchCameraBtn" data-tooltip="Visual Search">📷</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="nova-newtab__shortcuts" id="shortcuts">
+          <!-- Quick links -->
+        </div>
+
+        <div class="nova-newtab__features" id="featureCards">
+          <div class="nova-feature-card" onclick="novaApp.openGameCenter()">
+            <div class="nova-feature-card__icon">🎮</div>
+            <div class="nova-feature-card__title">Game Center</div>
+            <div class="nova-feature-card__desc">Play offline games when you're bored</div>
+          </div>
+          <div class="nova-feature-card" onclick="novaApp.toggleAI()">
+            <div class="nova-feature-card__icon">✨</div>
+            <div class="nova-feature-card__title">AI Assistant</div>
+            <div class="nova-feature-card__desc">Get help with anything, anytime</div>
+          </div>
+          <div class="nova-feature-card" onclick="novaApp.openSettings()">
+            <div class="nova-feature-card__icon">🛡️</div>
+            <div class="nova-feature-card__title">Privacy Center</div>
+            <div class="nova-feature-card__desc">Control your data and security</div>
+          </div>
+        </div>
+
+        <!-- Clock + Greeting -->
+        <div style="margin-top: auto; text-align: center; padding: 20px; opacity: 0.5;">
+          <div id="clock" style="font-family: var(--nova-font-mono); font-size: 2.5rem; font-weight: 300; letter-spacing: 4px;"></div>
+          <div id="greeting" style="font-size: var(--nova-text-sm); color: var(--nova-text-tertiary); margin-top: 4px;"></div>
+        </div>
+      </div>
+
+      <!-- Game Center Page -->
+      <div class="nova-games" id="gameCenter">
+        <button class="nova-games__back" onclick="novaApp.closeGameCenter()">← Back to browsing</button>
+        <div class="nova-games__bg">
+          <div class="nova-games__stars"></div>
+        </div>
+        <div class="nova-games__header">
+          <h2 class="nova-games__title gradient-text">🎮 Game Center</h2>
+          <p class="nova-games__subtitle">Offline games — No internet required</p>
+        </div>
+        <div class="nova-games__grid">
+          <div class="nova-game-card" onclick="novaApp.launchGame('runner')">
+            <div class="nova-game-card__preview nova-game-card__preview--runner">
+              <div class="nova-game-card__preview-glow"></div>
+              <div class="nova-game-card__preview-art">🚀</div>
+              <span class="nova-game-card__badge nova-game-card__badge--popular">Featured</span>
+            </div>
+            <div class="nova-game-card__info">
+              <div class="nova-game-card__name">Anti-Gravity Runner</div>
+              <div class="nova-game-card__desc">Fly through space, dodge asteroids, and defy gravity in this endless runner</div>
+              <div class="nova-game-card__meta">
+                <div class="nova-game-card__tags">
+                  <span class="nova-game-card__tag">Endless</span>
+                  <span class="nova-game-card__tag">Action</span>
+                </div>
+                <button class="nova-game-card__play-btn">▶</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="nova-game-card" onclick="novaApp.launchGame('puzzle')">
+            <div class="nova-game-card__preview nova-game-card__preview--puzzle">
+              <div class="nova-game-card__preview-glow"></div>
+              <div class="nova-game-card__preview-art">🧩</div>
+              <span class="nova-game-card__badge nova-game-card__badge--new">New</span>
+            </div>
+            <div class="nova-game-card__info">
+              <div class="nova-game-card__name">Nova Puzzle</div>
+              <div class="nova-game-card__desc">Match colors and clear blocks in this addictive pattern-matching puzzle</div>
+              <div class="nova-game-card__meta">
+                <div class="nova-game-card__tags">
+                  <span class="nova-game-card__tag">Puzzle</span>
+                  <span class="nova-game-card__tag">Casual</span>
+                </div>
+                <button class="nova-game-card__play-btn">▶</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="nova-game-card" onclick="novaApp.launchGame('strategy')">
+            <div class="nova-game-card__preview nova-game-card__preview--strategy">
+              <div class="nova-game-card__preview-glow"></div>
+              <div class="nova-game-card__preview-art">⚔️</div>
+            </div>
+            <div class="nova-game-card__info">
+              <div class="nova-game-card__name">Space Strategy</div>
+              <div class="nova-game-card__desc">Build your fleet, defend your base, and conquer the galaxy</div>
+              <div class="nova-game-card__meta">
+                <div class="nova-game-card__tags">
+                  <span class="nova-game-card__tag">Strategy</span>
+                  <span class="nova-game-card__tag">Tower Defense</span>
+                </div>
+                <button class="nova-game-card__play-btn">▶</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game View (shared) -->
+      <div class="nova-game-view" id="gameView">
+        <div class="nova-game-view__header">
+          <button class="nova-game-view__back" id="gameBackBtn">← Back</button>
+          <div class="nova-game-view__title" id="gameTitle">Game</div>
+          <div class="nova-game-view__score">
+            <div>
+              <div class="nova-game-view__score-label">Score</div>
+              <div class="nova-game-view__score-value" id="gameScore">0</div>
+            </div>
+            <div>
+              <div class="nova-game-view__score-label">Best</div>
+              <div class="nova-game-view__score-value" id="gameBest">0</div>
+            </div>
+          </div>
+        </div>
+        <div class="nova-game-view__canvas-wrapper" id="gameCanvasWrapper">
+          <canvas class="nova-game-view__canvas" id="gameCanvas"></canvas>
+        </div>
+        <div class="nova-game-over" id="gameOver">
+          <div class="nova-game-over__content">
+            <div class="nova-game-over__title gradient-text">Game Over</div>
+            <div class="nova-game-over__score" id="gameOverScore">Score: 0</div>
+            <div class="nova-game-over__best" id="gameOverBest">Best: 0</div>
+            <div class="nova-game-over__actions">
+              <button class="nova-btn nova-btn-primary" id="gameRetryBtn">🔄 Play Again</button>
+              <button class="nova-btn" id="gameExitBtn">Exit</button>
+            </div>
+          </div>
+        </div>
+        <div class="nova-game-pause" id="gamePause">
+          <div class="nova-game-pause__text gradient-text">⏸ PAUSED</div>
+        </div>
+      </div>
+
+      <!-- Settings Page -->
+      <div class="nova-settings" id="settingsPage">
+        <div class="nova-settings__header">
+          <h2 class="nova-settings__title">⚙ Settings</h2>
+          <p class="nova-settings__subtitle">Customize your NovaBrowser experience</p>
+        </div>
+
+        <!-- Theme Section -->
+        <div class="nova-settings__section">
+          <div class="nova-settings__section-title">🎨 Appearance</div>
+          <div class="nova-settings__card">
+            <div class="nova-settings__row">
+              <div>
+                <div class="nova-settings__label">Dynamic Theme</div>
+                <div class="nova-settings__desc">Automatically adapt theme to time of day</div>
+              </div>
+              <button class="nova-toggle nova-toggle--active" id="dynamicThemeToggle" onclick="novaApp.themeEngine.toggleDynamic()"></button>
+            </div>
+            <div class="nova-settings__row" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+              <div class="nova-settings__label">Manual Theme Selection</div>
+              <div class="nova-theme-picker" id="themePicker">
+                <div class="nova-theme-swatch nova-theme-swatch--midnight nova-theme-swatch--active" onclick="novaApp.themeEngine.setTheme('midnight')" data-theme="midnight">
+                  <span class="nova-theme-swatch__label">Midnight</span>
+                </div>
+                <div class="nova-theme-swatch nova-theme-swatch--aurora" onclick="novaApp.themeEngine.setTheme('aurora')" data-theme="aurora">
+                  <span class="nova-theme-swatch__label">Aurora</span>
+                </div>
+                <div class="nova-theme-swatch nova-theme-swatch--sunset" onclick="novaApp.themeEngine.setTheme('sunset')" data-theme="sunset">
+                  <span class="nova-theme-swatch__label">Sunset</span>
+                </div>
+                <div class="nova-theme-swatch nova-theme-swatch--forest" onclick="novaApp.themeEngine.setTheme('forest')" data-theme="forest">
+                  <span class="nova-theme-swatch__label">Forest</span>
+                </div>
+                <div class="nova-theme-swatch nova-theme-swatch--cosmos" onclick="novaApp.themeEngine.setTheme('cosmos')" data-theme="cosmos">
+                  <span class="nova-theme-swatch__label">Cosmos</span>
+                </div>
+                <div class="nova-theme-swatch nova-theme-swatch--cyber" onclick="novaApp.themeEngine.setTheme('cyber')" data-theme="cyber">
+                  <span class="nova-theme-swatch__label">Cyber</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Privacy Section -->
+        <div class="nova-settings__section">
+          <div class="nova-settings__section-title">🛡️ Privacy & Security</div>
+          
+          <div class="nova-privacy-stats">
+            <div class="nova-privacy-stat">
+              <div class="nova-privacy-stat__value gradient-text" id="trackersBlocked">2,847</div>
+              <div class="nova-privacy-stat__label">Trackers Blocked</div>
+            </div>
+            <div class="nova-privacy-stat">
+              <div class="nova-privacy-stat__value gradient-text-hot" id="adsBlocked">1,293</div>
+              <div class="nova-privacy-stat__label">Ads Blocked</div>
+            </div>
+            <div class="nova-privacy-stat">
+              <div class="nova-privacy-stat__value" style="color: var(--nova-accent-success);" id="httpsUpgrades">456</div>
+              <div class="nova-privacy-stat__label">HTTPS Upgrades</div>
+            </div>
+          </div>
+
+          <div class="nova-settings__card">
+            <div class="nova-settings__row">
+              <div>
+                <div class="nova-settings__label">Tracker Blocker</div>
+                <div class="nova-settings__desc">Block known tracking scripts and pixels</div>
+              </div>
+              <button class="nova-toggle nova-toggle--active" id="trackerToggle"></button>
+            </div>
+            <div class="nova-settings__row">
+              <div>
+                <div class="nova-settings__label">Ad Blocker</div>
+                <div class="nova-settings__desc">Remove intrusive advertisements</div>
+              </div>
+              <button class="nova-toggle nova-toggle--active" id="adToggle"></button>
+            </div>
+            <div class="nova-settings__row">
+              <div>
+                <div class="nova-settings__label">HTTPS Enforcement</div>
+                <div class="nova-settings__desc">Automatically upgrade to secure connections</div>
+              </div>
+              <button class="nova-toggle nova-toggle--active" id="httpsToggle"></button>
+            </div>
+            <div class="nova-settings__row">
+              <div>
+                <div class="nova-settings__label">Phishing Detection</div>
+                <div class="nova-settings__desc">AI-powered detection of suspicious websites</div>
+              </div>
+              <button class="nova-toggle nova-toggle--active" id="phishingToggle"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance Section -->
+        <div class="nova-settings__section">
+          <div class="nova-settings__section-title">⚡ Performance</div>
+          <div class="nova-settings__card">
+            <div class="nova-settings__row">
+              <div>
+                <div class="nova-settings__label">Tab Suspension</div>
+                <div class="nova-settings__desc">Suspend inactive tabs to save memory</div>
+              </div>
+              <button class="nova-toggle nova-toggle--active" id="suspendToggle"></button>
+            </div>
+            <div class="nova-settings__row">
+              <div>
+                <div class="nova-settings__label">GPU Acceleration</div>
+                <div class="nova-settings__desc">Use hardware acceleration for rendering</div>
+              </div>
+              <button class="nova-toggle nova-toggle--active" id="gpuToggle"></button>
+            </div>
+            <div class="nova-settings__row">
+              <div>
+                <div class="nova-settings__label">Predictive Preloading</div>
+                <div class="nova-settings__desc">Preload likely-next pages for instant loading</div>
+              </div>
+              <button class="nova-toggle" id="preloadToggle"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Focus Mode Overlay -->
+      <div class="nova-focus-overlay" id="focusOverlay"></div>
+
+      <!-- AI Assistant Panel -->
+      <div class="nova-ai" id="aiPanel">
+        <div class="nova-ai__header">
+          <div class="nova-ai__avatar">✨</div>
+          <div class="nova-ai__header-info">
+            <div class="nova-ai__name">Nova AI</div>
+            <div class="nova-ai__status">Online • Ready to help</div>
+          </div>
+          <button class="nova-ai__close" id="aiCloseBtn">✕</button>
+        </div>
+        <div class="nova-ai__messages" id="aiMessages">
+          <div class="nova-ai__message nova-ai__message--ai">
+            <div class="nova-ai__message-avatar">✨</div>
+            <div class="nova-ai__message-content">
+              Hey there! 👋 I'm Nova AI, your browser assistant. I can help you with:
+              <div class="nova-ai__suggestions" style="margin-top: 8px;">
+                <span class="nova-ai__suggestion" onclick="novaApp.aiSuggest('Summarize this page')">📝 Summarize page</span>
+                <span class="nova-ai__suggestion" onclick="novaApp.aiSuggest('Find similar sites')">🔍 Find similar</span>
+                <span class="nova-ai__suggestion" onclick="novaApp.aiSuggest('Translate page')">🌐 Translate</span>
+                <span class="nova-ai__suggestion" onclick="novaApp.aiSuggest('What can you do?')">❓ Capabilities</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="nova-ai__input-area">
+          <div class="nova-ai__quick-actions">
+            <span class="nova-ai__quick-action" onclick="novaApp.aiSuggest('Summarize')">📝 Summarize</span>
+            <span class="nova-ai__quick-action" onclick="novaApp.aiSuggest('Explain')">💡 Explain</span>
+            <span class="nova-ai__quick-action" onclick="novaApp.aiSuggest('Research')">🔬 Research</span>
+          </div>
+          <div class="nova-ai__input-wrapper">
+            <textarea 
+              class="nova-ai__textarea" 
+              id="aiInput" 
+              placeholder="Ask Nova anything..." 
+              rows="1"
+            ></textarea>
+            <div class="nova-ai__input-actions">
+              <button class="nova-ai__input-btn" id="aiVoiceBtn" data-tooltip="Voice Input">🎤</button>
+              <button class="nova-ai__input-btn nova-ai__input-btn--send" id="aiSendBtn">➤</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="nova-statusbar" id="statusBar">
+      <div class="nova-statusbar__left">
+        <div class="nova-statusbar__item">
+          <span class="nova-statusbar__dot nova-statusbar__dot--online" id="statusDot"></span>
+          <span id="statusText">Ready</span>
+        </div>
+      </div>
+      <div class="nova-statusbar__right">
+        <div class="nova-statusbar__item" id="memoryUsage">
+          <span>Memory: 142 MB</span>
+        </div>
+        <div class="nova-statusbar__item" id="tabCount">
+          <span>1 tab</span>
+        </div>
+        <div class="nova-statusbar__item">
+          <span>Ctrl+K: Command Palette</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D Tab View -->
+    <div class="nova-3d-tabs" id="tabs3DView">
+      <div class="nova-3d-tabs__header">
+        <div class="nova-3d-tabs__title gradient-text">Tab Overview</div>
+        <div class="nova-3d-tabs__count" id="tabs3DCount">0 tabs open</div>
+      </div>
+      <div class="nova-3d-tabs__container nova-3d-tabs--grid" id="tabs3DContainer">
+        <!-- 3D tab cards inserted dynamically -->
+      </div>
+    </div>
+
+    <!-- Command Palette -->
+    <div class="nova-command-palette" id="commandPalette">
+      <div class="nova-command-palette__container">
+        <div class="nova-command-palette__search">
+          <span class="nova-command-palette__search-icon">🔍</span>
+          <input 
+            type="text" 
+            class="nova-command-palette__input"
+            id="commandInput"
+            placeholder="Type a command..."
+            autocomplete="off"
+          >
+          <span class="nova-command-palette__badge">Ctrl+K</span>
+        </div>
+        <div class="nova-command-palette__results" id="commandResults">
+          <!-- Results inserted dynamically -->
+        </div>
+        <div class="nova-command-palette__footer">
+          <div class="nova-command-palette__footer-keys">
+            <span class="nova-command-palette__footer-key"><kbd>↑↓</kbd> Navigate</span>
+            <span class="nova-command-palette__footer-key"><kbd>↵</kbd> Select</span>
+            <span class="nova-command-palette__footer-key"><kbd>Esc</kbd> Close</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div class="nova-context-menu" id="contextMenu">
+      <div class="nova-context-menu__item" onclick="novaApp.contextAction('back')">
+        <span class="nova-context-menu__item-icon">←</span> Back
+        <span class="nova-context-menu__item-shortcut">Alt+←</span>
+      </div>
+      <div class="nova-context-menu__item" onclick="novaApp.contextAction('forward')">
+        <span class="nova-context-menu__item-icon">→</span> Forward
+        <span class="nova-context-menu__item-shortcut">Alt+→</span>
+      </div>
+      <div class="nova-context-menu__item" onclick="novaApp.contextAction('refresh')">
+        <span class="nova-context-menu__item-icon">⟳</span> Reload
+        <span class="nova-context-menu__item-shortcut">Ctrl+R</span>
+      </div>
+      <div class="nova-context-menu__divider"></div>
+      <div class="nova-context-menu__item" onclick="novaApp.contextAction('bookmark')">
+        <span class="nova-context-menu__item-icon">☆</span> Bookmark This Page
+        <span class="nova-context-menu__item-shortcut">Ctrl+D</span>
+      </div>
+      <div class="nova-context-menu__item" onclick="novaApp.contextAction('focus')">
+        <span class="nova-context-menu__item-icon">👁</span> Focus Mode
+      </div>
+      <div class="nova-context-menu__divider"></div>
+      <div class="nova-context-menu__item" onclick="novaApp.contextAction('ai')">
+        <span class="nova-context-menu__item-icon">✨</span> Ask Nova AI
+        <span class="nova-context-menu__item-shortcut">Ctrl+J</span>
+      </div>
+      <div class="nova-context-menu__item" onclick="novaApp.contextAction('inspect')">
+        <span class="nova-context-menu__item-icon">🔧</span> Inspect Element
+        <span class="nova-context-menu__item-shortcut">Ctrl+Shift+I</span>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer"></div>
+
+    <!-- Overlay -->
+    <div class="nova-overlay" id="overlay"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/theme-engine.js"></script>
+  <script src="js/tab-manager.js"></script>
+  <script src="js/command-palette.js"></script>
+  <script src="js/ai-assistant.js"></script>
+  <script src="js/focus-mode.js"></script>
+  <script src="js/voice-nav.js"></script>
+  <script src="js/games/runner.js"></script>
+  <script src="js/games/puzzle.js"></script>
+  <script src="js/games/strategy.js"></script>
+  <script src="js/security.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

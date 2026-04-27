@@ -1,0 +1,258 @@
+/* ============================================
+   NovaBrowser — 3D Tab Management
+   ============================================ */
+
+/* ── 3D Tab Switcher Overlay ── */
+.nova-3d-tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 400;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: blur(30px);
+}
+
+.nova-3d-tabs--visible {
+  display: flex;
+  animation: nova-fade-in 0.3s var(--nova-ease-smooth) forwards;
+}
+
+.nova-3d-tabs__header {
+  position: absolute;
+  top: var(--nova-space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.nova-3d-tabs__title {
+  font-family: var(--nova-font-display);
+  font-size: var(--nova-text-xl);
+  font-weight: 700;
+  margin-bottom: var(--nova-space-xs);
+}
+
+.nova-3d-tabs__count {
+  color: var(--nova-text-tertiary);
+  font-size: var(--nova-text-sm);
+}
+
+.nova-3d-tabs__container {
+  display: flex;
+  gap: var(--nova-space-lg);
+  transform-style: preserve-3d;
+  transition: transform 0.5s var(--nova-ease-spring);
+  padding: var(--nova-space-3xl);
+}
+
+.nova-3d-tab-card {
+  width: 320px;
+  height: 220px;
+  border-radius: var(--nova-radius-xl);
+  background: var(--nova-bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s var(--nova-ease-spring);
+  transform-style: preserve-3d;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.nova-3d-tab-card:hover {
+  transform: scale(1.08) translateZ(30px);
+  border-color: var(--nova-accent-primary);
+  box-shadow: 0 20px 60px rgba(108, 92, 231, 0.3);
+}
+
+.nova-3d-tab-card--active {
+  border-color: var(--nova-accent-primary);
+  box-shadow: 0 0 30px rgba(108, 92, 231, 0.3);
+}
+
+.nova-3d-tab-card__preview {
+  width: 100%;
+  height: 160px;
+  background: var(--nova-bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: var(--nova-text-tertiary);
+  position: relative;
+  overflow: hidden;
+}
+
+.nova-3d-tab-card__preview-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(transparent, var(--nova-bg-secondary));
+}
+
+.nova-3d-tab-card__info {
+  padding: var(--nova-space-sm) var(--nova-space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--nova-space-sm);
+}
+
+.nova-3d-tab-card__favicon {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.nova-3d-tab-card__title {
+  flex: 1;
+  font-size: var(--nova-text-xs);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nova-3d-tab-card__close {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--nova-text-tertiary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all var(--nova-duration-fast);
+}
+
+.nova-3d-tab-card__close:hover {
+  background: rgba(255, 107, 107, 0.2);
+  color: var(--nova-accent-danger);
+}
+
+/* ── 3D Rotation Modes ── */
+.nova-3d-tabs--carousel .nova-3d-tabs__container {
+  transform-style: preserve-3d;
+}
+
+.nova-3d-tabs--grid .nova-3d-tabs__container {
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 80vw;
+}
+
+.nova-3d-tabs--grid .nova-3d-tab-card {
+  width: 280px;
+  height: 200px;
+}
+
+/* ── Tab Stack Visual ── */
+.nova-tab-stack {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nova-tab-stack__count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--nova-accent-primary);
+  color: white;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* ── Tab Group ── */
+.nova-tab-group {
+  display: flex;
+  align-items: center;
+  border-radius: var(--nova-radius-md);
+  overflow: hidden;
+  margin: 0 2px;
+}
+
+.nova-tab-group__label {
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: var(--nova-radius-md) 0 0 var(--nova-radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nova-tab-group--purple .nova-tab-group__label {
+  background: rgba(108, 92, 231, 0.2);
+  color: var(--nova-accent-secondary);
+}
+
+.nova-tab-group--teal .nova-tab-group__label {
+  background: rgba(0, 206, 201, 0.2);
+  color: var(--nova-accent-tertiary);
+}
+
+.nova-tab-group--pink .nova-tab-group__label {
+  background: rgba(253, 121, 168, 0.2);
+  color: var(--nova-accent-hot);
+}
+
+/* ── Drag and Drop ── */
+.nova-tab--dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+.nova-tab--drag-over {
+  border-left: 2px solid var(--nova-accent-primary);
+}
+
+.nova-tab--drop-target {
+  background: rgba(108, 92, 231, 0.1);
+}
+
+/* ── Pinned Tabs ── */
+.nova-tab--pinned {
+  min-width: 40px;
+  max-width: 40px;
+  padding: 6px;
+  justify-content: center;
+}
+
+.nova-tab--pinned .nova-tab__title,
+.nova-tab--pinned .nova-tab__close {
+  display: none;
+}
+
+/* ── Tab Suspension Indicator ── */
+.nova-tab--suspended {
+  opacity: 0.6;
+}
+
+.nova-tab--suspended .nova-tab__favicon {
+  filter: grayscale(100%);
+}

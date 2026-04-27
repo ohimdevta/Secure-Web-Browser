@@ -1,0 +1,21 @@
+{
+  "name": "novabrowser",
+  "version": "1.0.0",
+  "description": "NovaBrowser — Next-generation web browser with Chromium engine",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging"
+  },
+  "keywords": [
+    "browser",
+    "chromium",
+    "electron"
+  ],
+  "author": "NovaBrowser Team",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^41.3.0"
+  }
+}

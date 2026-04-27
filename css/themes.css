@@ -1,0 +1,343 @@
+/* ============================================
+   NovaBrowser — Dynamic Theme System
+   ============================================ */
+
+/* ── Theme Transition ── */
+.nova-browser {
+  transition: 
+    --nova-bg-primary 0.8s ease,
+    --nova-bg-secondary 0.8s ease,
+    --nova-accent-primary 0.8s ease;
+}
+
+/* ── Midnight Theme (Default) ── */
+[data-theme="midnight"] {
+  --nova-bg-primary: #0a0a0f;
+  --nova-bg-secondary: #12121a;
+  --nova-bg-tertiary: #1a1a28;
+  --nova-bg-elevated: #222236;
+  --nova-accent-primary: #6c5ce7;
+  --nova-accent-secondary: #a29bfe;
+  --nova-accent-tertiary: #00cec9;
+  --nova-accent-glow: #6c5ce7;
+}
+
+/* ── Aurora Theme ── */
+[data-theme="aurora"] {
+  --nova-bg-primary: #050a18;
+  --nova-bg-secondary: #0a1428;
+  --nova-bg-tertiary: #0f1e38;
+  --nova-bg-elevated: #142848;
+  --nova-accent-primary: #00d2ff;
+  --nova-accent-secondary: #7af5ff;
+  --nova-accent-tertiary: #00ff87;
+  --nova-accent-glow: #00d2ff;
+  --nova-accent-hot: #ff00ff;
+}
+
+/* ── Sunset Theme ── */
+[data-theme="sunset"] {
+  --nova-bg-primary: #1a0a0a;
+  --nova-bg-secondary: #241212;
+  --nova-bg-tertiary: #2e1a1a;
+  --nova-bg-elevated: #382222;
+  --nova-accent-primary: #ff6b6b;
+  --nova-accent-secondary: #ffa8a8;
+  --nova-accent-tertiary: #fdcb6e;
+  --nova-accent-glow: #ff6b6b;
+  --nova-accent-hot: #ff9ff3;
+}
+
+/* ── Forest Theme ── */
+[data-theme="forest"] {
+  --nova-bg-primary: #0a1208;
+  --nova-bg-secondary: #121a10;
+  --nova-bg-tertiary: #1a2218;
+  --nova-bg-elevated: #222a20;
+  --nova-accent-primary: #00b894;
+  --nova-accent-secondary: #55efc4;
+  --nova-accent-tertiary: #81ecec;
+  --nova-accent-glow: #00b894;
+  --nova-accent-hot: #fdcb6e;
+}
+
+/* ── Cosmos Theme ── */
+[data-theme="cosmos"] {
+  --nova-bg-primary: #0a0515;
+  --nova-bg-secondary: #140a22;
+  --nova-bg-tertiary: #1e0f30;
+  --nova-bg-elevated: #28143e;
+  --nova-accent-primary: #e056fd;
+  --nova-accent-secondary: #f0a0ff;
+  --nova-accent-tertiary: #686de0;
+  --nova-accent-glow: #e056fd;
+  --nova-accent-hot: #fd79a8;
+}
+
+/* ── Cyber Theme ── */
+[data-theme="cyber"] {
+  --nova-bg-primary: #0a0f0a;
+  --nova-bg-secondary: #0f1a0f;
+  --nova-bg-tertiary: #142814;
+  --nova-bg-elevated: #1a321a;
+  --nova-accent-primary: #00ff41;
+  --nova-accent-secondary: #7fff7f;
+  --nova-accent-tertiary: #00ffff;
+  --nova-accent-glow: #00ff41;
+  --nova-accent-hot: #ff0040;
+}
+
+/* ── Focus Mode Styles ── */
+.nova-browser--focus-mode .nova-tabbar,
+.nova-browser--focus-mode .nova-titlebar,
+.nova-browser--focus-mode .nova-statusbar {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+  border: none;
+  transition: all 0.5s var(--nova-ease-smooth);
+}
+
+.nova-browser--focus-mode .nova-navbar {
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: all 0.3s var(--nova-ease-smooth);
+  z-index: 100;
+}
+
+.nova-browser--focus-mode .nova-navbar:hover {
+  opacity: 1;
+  transform: translateY(0);
+  background: rgba(18, 18, 26, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.nova-browser--focus-mode .nova-content {
+  border-radius: 0;
+}
+
+/* ── Focus Mode Reading Enhancement ── */
+.nova-focus-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  pointer-events: none;
+  display: none;
+}
+
+.nova-browser--focus-mode .nova-focus-overlay {
+  display: block;
+}
+
+.nova-focus-reader {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: var(--nova-space-3xl) var(--nova-space-xl);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--nova-text-secondary);
+}
+
+/* ── Settings Panel ── */
+.nova-settings {
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: var(--nova-space-2xl);
+}
+
+.nova-settings--active {
+  display: flex;
+}
+
+.nova-settings__header {
+  margin-bottom: var(--nova-space-xl);
+}
+
+.nova-settings__title {
+  font-family: var(--nova-font-display);
+  font-size: var(--nova-text-2xl);
+  font-weight: 700;
+  margin-bottom: var(--nova-space-xs);
+}
+
+.nova-settings__subtitle {
+  color: var(--nova-text-tertiary);
+  font-size: var(--nova-text-sm);
+}
+
+.nova-settings__section {
+  margin-bottom: var(--nova-space-xl);
+}
+
+.nova-settings__section-title {
+  font-family: var(--nova-font-display);
+  font-weight: 600;
+  font-size: var(--nova-text-md);
+  margin-bottom: var(--nova-space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--nova-space-sm);
+}
+
+.nova-settings__card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--nova-radius-lg);
+  padding: var(--nova-space-lg);
+  margin-bottom: var(--nova-space-md);
+}
+
+.nova-settings__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--nova-space-sm) 0;
+}
+
+.nova-settings__row + .nova-settings__row {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.nova-settings__label {
+  font-size: var(--nova-text-sm);
+}
+
+.nova-settings__desc {
+  font-size: var(--nova-text-xs);
+  color: var(--nova-text-tertiary);
+  margin-top: 2px;
+}
+
+/* ── Toggle Switch ── */
+.nova-toggle {
+  width: 44px;
+  height: 24px;
+  border-radius: var(--nova-radius-full);
+  background: var(--nova-bg-elevated);
+  cursor: pointer;
+  position: relative;
+  transition: background var(--nova-duration-normal);
+  border: none;
+  flex-shrink: 0;
+}
+
+.nova-toggle--active {
+  background: var(--nova-accent-primary);
+}
+
+.nova-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  transition: transform var(--nova-duration-normal) var(--nova-ease-spring);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nova-toggle--active::after {
+  transform: translateX(20px);
+}
+
+/* ── Theme Picker ── */
+.nova-theme-picker {
+  display: flex;
+  gap: var(--nova-space-md);
+  flex-wrap: wrap;
+}
+
+.nova-theme-swatch {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--nova-radius-lg);
+  cursor: pointer;
+  position: relative;
+  transition: all var(--nova-duration-normal) var(--nova-ease-spring);
+  border: 2px solid transparent;
+  overflow: hidden;
+}
+
+.nova-theme-swatch:hover {
+  transform: scale(1.1);
+}
+
+.nova-theme-swatch--active {
+  border-color: white;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.nova-theme-swatch--midnight {
+  background: linear-gradient(135deg, #0a0a0f, #6c5ce7);
+}
+.nova-theme-swatch--aurora {
+  background: linear-gradient(135deg, #050a18, #00d2ff);
+}
+.nova-theme-swatch--sunset {
+  background: linear-gradient(135deg, #1a0a0a, #ff6b6b);
+}
+.nova-theme-swatch--forest {
+  background: linear-gradient(135deg, #0a1208, #00b894);
+}
+.nova-theme-swatch--cosmos {
+  background: linear-gradient(135deg, #0a0515, #e056fd);
+}
+.nova-theme-swatch--cyber {
+  background: linear-gradient(135deg, #0a0f0a, #00ff41);
+}
+
+.nova-theme-swatch__label {
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Privacy Dashboard Additions ── */
+.nova-privacy-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--nova-space-md);
+  margin-bottom: var(--nova-space-lg);
+}
+
+.nova-privacy-stat {
+  text-align: center;
+  padding: var(--nova-space-lg);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--nova-radius-lg);
+}
+
+.nova-privacy-stat__value {
+  font-family: var(--nova-font-display);
+  font-size: var(--nova-text-2xl);
+  font-weight: 800;
+  margin-bottom: var(--nova-space-xs);
+}
+
+.nova-privacy-stat__label {
+  font-size: var(--nova-text-xs);
+  color: var(--nova-text-tertiary);
+}
