@@ -1,5 +1,5 @@
 /* ============================================
-   NovaBrowser — Preload Script
+   Search Bharat - Preload Script
    Secure bridge between Electron and renderer.
    Exposes safe APIs to the browser UI.
    ============================================ */
@@ -16,6 +16,14 @@ contextBridge.exposeInMainWorld('electronAPI', {
   onTrackerBlocked: (callback) => {
     ipcRenderer.on('tracker-blocked', (event, url) => callback(url));
   },
+
+  // Privacy & VPN
+  setProxy: (location) => ipcRenderer.invoke('set-proxy', location),
+  clearProxy: () => ipcRenderer.send('clear-proxy'),
+  setWebRTC: (allow) => ipcRenderer.send('set-webrtc', allow),
+
+  // Screenshot
+  takeScreenshot: () => ipcRenderer.invoke('take-screenshot'),
 
   // Check if running in Electron
   isElectron: true,

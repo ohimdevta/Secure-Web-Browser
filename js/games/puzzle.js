@@ -1,16 +1,16 @@
 /* ============================================
-   NovaBrowser — Nova Puzzle Game
+   Search Bharat - Bharat Puzzle Game
    Color matching block puzzle
    ============================================ */
 
-class NovaPuzzle {
+class BharatPuzzle {
   constructor() {
     this.canvas = null;
     this.ctx = null;
     this.running = false;
     this.paused = false;
     this.score = 0;
-    this.bestScore = parseInt(localStorage.getItem('nova-puzzle-best') || '0');
+    this.bestScore = parseInt(localStorage.getItem('bharat-puzzle-best') || '0');
     this.frameId = null;
 
     // Grid
@@ -90,8 +90,8 @@ class NovaPuzzle {
     this.running = true;
     this.paused = false;
     
-    document.getElementById('gameOver').classList.remove('nova-game-over--visible');
-    document.getElementById('gamePause').classList.remove('nova-game-pause--visible');
+    document.getElementById('gameOver').classList.remove('bharat-game-over--visible');
+    document.getElementById('gamePause').classList.remove('bharat-game-pause--visible');
     
     this.updateScoreUI();
     this.render();
@@ -193,7 +193,7 @@ class NovaPuzzle {
         this.level++;
         this.movesLeft = 30;
         this.targetScore += 300 * this.level;
-        novaApp.showToast(`Level ${this.level}! Target: ${this.targetScore}`, '🎉');
+        bharatApp.showToast(`Level ${this.level}! Target: ${this.targetScore}`, '🎉');
       } else {
         this.gameOver();
       }
@@ -512,7 +512,7 @@ class NovaPuzzle {
     
     if (this.score > this.bestScore) {
       this.bestScore = this.score;
-      localStorage.setItem('nova-puzzle-best', this.bestScore);
+      localStorage.setItem('bharat-puzzle-best', this.bestScore);
     }
 
     document.getElementById('gameOverScore').textContent = `Score: ${this.score}`;
@@ -520,14 +520,14 @@ class NovaPuzzle {
     document.getElementById('gameBest').textContent = this.bestScore;
 
     setTimeout(() => {
-      document.getElementById('gameOver').classList.add('nova-game-over--visible');
+      document.getElementById('gameOver').classList.add('bharat-game-over--visible');
     }, 300);
   }
 
   togglePause() {
     if (!this.running) return;
     this.paused = !this.paused;
-    document.getElementById('gamePause').classList.toggle('nova-game-pause--visible', this.paused);
+    document.getElementById('gamePause').classList.toggle('bharat-game-pause--visible', this.paused);
   }
 
   updateScoreUI() {

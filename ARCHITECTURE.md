@@ -1,8 +1,8 @@
-# NovaBrowser — System Architecture Document
+# Search Bharat - System Architecture Document
 
 ## 1. Overview
 
-NovaBrowser is a next-generation web browser designed to compete with Google Chrome through radical UI innovation, AI integration, and unique offline capabilities. This document defines the complete system architecture, from high-level process model to individual module specifications.
+Search Bharat is a next-generation web browser designed to compete with Google Chrome through radical UI innovation, AI integration, and unique offline capabilities. This document defines the complete system architecture, from high-level process model to individual module specifications.
 
 ---
 
@@ -180,7 +180,7 @@ HTML/CSS/JS Input
      - Space theme with asteroids, beams, powerups
      - Particle effects and explosions
      - Score persistence via LocalStorage
-  2. **Nova Puzzle** (`js/games/puzzle.js`)
+  2. **Bharat Puzzle** (`js/games/puzzle.js`)
      - Match-3 color puzzle with cascading combos
      - Level progression with targets
      - Smooth swap and drop animations
@@ -193,7 +193,7 @@ HTML/CSS/JS Input
 ## 6. Folder Structure
 
 ```
-nova-browser/
+bharat-browser/
 ├── index.html                    # Main browser shell
 ├── ARCHITECTURE.md               # This document
 │
@@ -217,7 +217,7 @@ nova-browser/
 │   ├── security.js               # Security & privacy module
 │   └── games/
 │       ├── runner.js             # Anti-Gravity Runner
-│       ├── puzzle.js             # Nova Puzzle
+│       ├── puzzle.js             # Bharat Puzzle
 │       └── strategy.js           # Space Strategy
 │
 └── (future)

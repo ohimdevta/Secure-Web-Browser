@@ -1,5 +1,5 @@
 /* ============================================
-   NovaBrowser — Security Module
+   Search Bharat - Security Module
    Privacy dashboard and protection features
    ============================================ */
 
@@ -23,7 +23,7 @@ class Security {
   }
 
   loadSettings() {
-    const saved = localStorage.getItem('nova-security');
+    const saved = localStorage.getItem('bharat-security');
     if (saved) {
       try {
         this.settings = JSON.parse(saved);
@@ -35,7 +35,7 @@ class Security {
   }
 
   saveSettings() {
-    localStorage.setItem('nova-security', JSON.stringify(this.settings));
+    localStorage.setItem('bharat-security', JSON.stringify(this.settings));
   }
 
   bindToggles() {
@@ -51,11 +51,11 @@ class Security {
       if (el) {
         el.addEventListener('click', () => {
           this.settings[key] = !this.settings[key];
-          el.classList.toggle('nova-toggle--active', this.settings[key]);
+          el.classList.toggle('bharat-toggle--active', this.settings[key]);
           this.saveSettings();
           
           const label = key.replace(/([A-Z])/g, ' $1').trim();
-          novaApp.showToast(
+          bharatApp.showToast(
             `${label} ${this.settings[key] ? 'enabled' : 'disabled'}`,
             this.settings[key] ? '🛡️' : '⚠️'
           );
@@ -68,7 +68,7 @@ class Security {
       const el = document.getElementById(id);
       if (el) {
         el.addEventListener('click', () => {
-          el.classList.toggle('nova-toggle--active');
+          el.classList.toggle('bharat-toggle--active');
         });
       }
     });
@@ -85,7 +85,7 @@ class Security {
     Object.entries(map).forEach(([id, key]) => {
       const el = document.getElementById(id);
       if (el) {
-        el.classList.toggle('nova-toggle--active', this.settings[key]);
+        el.classList.toggle('bharat-toggle--active', this.settings[key]);
       }
     });
   }

@@ -1,0 +1,201 @@
+/* ============================================
+   Search Bharat - History Styles
+   ============================================ */
+
+.bharat-history {
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  padding: var(--bharat-space-3xl);
+  background: rgba(10, 10, 15, 0.4);
+  backdrop-filter: blur(20px);
+  overflow-y: auto;
+  animation: historyFadeIn 0.5s ease forwards;
+}
+
+.bharat-history--active {
+  display: flex;
+}
+
+@keyframes historyFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.bharat-history__header {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.bharat-history__title {
+  font-family: var(--bharat-font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.bharat-history__controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.bharat-history__search-wrap {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.bharat-history__search {
+  width: 100%;
+  padding: 12px 16px 12px 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.bharat-history__search:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--bharat-accent-primary);
+  box-shadow: 0 0 0 4px rgba(108, 92, 231, 0.1);
+}
+
+.bharat-history__search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+
+.bharat-history__clear-btn {
+  padding: 12px 20px;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  border-radius: 12px;
+  color: #ff6b6b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.bharat-history__clear-btn:hover {
+  background: rgba(255, 107, 107, 0.2);
+  transform: translateY(-2px);
+}
+
+.bharat-history__list {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.bharat-history__date-group {
+  font-family: var(--bharat-font-display);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--bharat-text-tertiary);
+  margin: 32px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bharat-history-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.bharat-history-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.08);
+  transform: translateX(4px);
+}
+
+.bharat-history-item__icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-right: 16px;
+}
+
+.bharat-history-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.bharat-history-item__title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.bharat-history-item__url {
+  font-size: 0.75rem;
+  color: var(--bharat-text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bharat-history-item__time {
+  font-size: 0.75rem;
+  color: var(--bharat-text-tertiary);
+  margin: 0 16px;
+  white-space: nowrap;
+}
+
+.bharat-history-item__delete {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--bharat-text-tertiary);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.bharat-history-item:hover .bharat-history-item__delete {
+  opacity: 1;
+}
+
+.bharat-history-item__delete:hover {
+  background: rgba(255, 107, 107, 0.15);
+  color: #ff6b6b;
+}
+
+.bharat-history__empty {
+  text-align: center;
+  padding: 64px 0;
+  color: var(--bharat-text-tertiary);
+}

@@ -1,21 +1,66 @@
 {
-  "name": "novabrowser",
-  "version": "1.0.0",
-  "description": "NovaBrowser — Next-generation web browser with Chromium engine",
+  "name": "SearchBharat",
+  "version": "1.0.1",
+  "description": "Search Bharat - India ready 2 Search with Chromium engine",
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ohimdevta/SearchBharat-Web-Browser.git"
+  },
   "scripts": {
     "start": "electron .",
-    "dev": "electron . --enable-logging"
+    "dev": "electron . --enable-logging",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.searchbharat.browser",
+    "productName": "SearchBharat",
+    "icon": "icon.png",
+    "copyright": "Copyright © 2026 Search Bharat Team",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "signtoolOptions": {
+        "sign": null
+      }
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Search Bharat"
+    },
+    "mac": {
+      "target": {
+        "target": "dmg",
+        "arch": [
+          "universal"
+        ]
+      }
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
   },
   "keywords": [
     "browser",
     "chromium",
     "electron"
   ],
-  "author": "NovaBrowser Team",
+  "author": "Search Bharat Team",
   "license": "MIT",
   "type": "commonjs",
   "devDependencies": {
-    "electron": "^41.3.0"
+    "electron": "^41.3.0",
+    "electron-builder": "^26.15.3"
   }
 }

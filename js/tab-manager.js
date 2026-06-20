@@ -1,5 +1,5 @@
 /* ============================================
-   NovaBrowser — Tab Manager
+   Search Bharat - Tab Manager
    Multi-tab management with 3D view
    ============================================ */
 
@@ -21,19 +21,19 @@ class TabManager {
     document.getElementById('newTabBtn').addEventListener('click', () => this.createTab());
     document.getElementById('toggle3DTabs').addEventListener('click', () => this.toggle3DView());
     document.getElementById('gameBackBtn').addEventListener('click', () => {
-      if (window.novaApp) window.novaApp.exitGame();
+      if (window.bharatApp) window.bharatApp.exitGame();
     });
     document.getElementById('gameRetryBtn').addEventListener('click', () => {
-      if (window.novaApp && window.novaApp.currentGame) {
-        window.novaApp.currentGame.restart();
+      if (window.bharatApp && window.bharatApp.currentGame) {
+        window.bharatApp.currentGame.restart();
       }
     });
     document.getElementById('gameExitBtn').addEventListener('click', () => {
-      if (window.novaApp) window.novaApp.exitGame();
+      if (window.bharatApp) window.bharatApp.exitGame();
     });
   }
 
-  createTab(title = 'New Tab', type = 'newtab', url = '', favicon = '🌐') {
+  createTab(title = 'New Tab', type = 'newtab', url = '', favicon = '🌐', isIncognito = false) {
     const id = ++this.tabIdCounter;
     const tab = {
       id,
@@ -41,6 +41,7 @@ class TabManager {
       type,
       url,
       favicon,
+      isIncognito,
       status: 'ready',
       suspended: false,
       pinned: false,
@@ -58,24 +59,24 @@ class TabManager {
 
   renderTab(tab) {
     const tabEl = document.createElement('div');
-    tabEl.className = 'nova-tab';
+    tabEl.className = `bharat-tab ${tab.isIncognito ? 'bharat-tab--incognito' : ''}`;
     tabEl.dataset.tabId = tab.id;
     tabEl.draggable = true;
     tabEl.innerHTML = `
-      <div class="nova-tab__favicon">${tab.favicon}</div>
-      <span class="nova-tab__title">${tab.title}</span>
-      <button class="nova-tab__close" data-close="${tab.id}">✕</button>
+      <div class="bharat-tab__favicon">${tab.isIncognito ? '🕵️' : tab.favicon}</div>
+      <span class="bharat-tab__title">${tab.title}</span>
+      <button class="bharat-tab__close" data-close="${tab.id}">✕</button>
     `;
 
     // Click to switch
     tabEl.addEventListener('click', (e) => {
-      if (!e.target.closest('.nova-tab__close')) {
+      if (!e.target.closest('.bharat-tab__close')) {
         this.switchToTab(tab.id);
       }
     });
 
     // Close button
-    tabEl.querySelector('.nova-tab__close').addEventListener('click', (e) => {
+    tabEl.querySelector('.bharat-tab__close').addEventListener('click', (e) => {
       e.stopPropagation();
       this.closeTab(tab.id);
     });
@@ -83,26 +84,26 @@ class TabManager {
     // Drag events
     tabEl.addEventListener('dragstart', (e) => {
       e.dataTransfer.setData('text/plain', tab.id);
-      tabEl.classList.add('nova-tab--dragging');
+      tabEl.classList.add('bharat-tab--dragging');
     });
 
     tabEl.addEventListener('dragend', () => {
-      tabEl.classList.remove('nova-tab--dragging');
-      document.querySelectorAll('.nova-tab--drag-over').forEach(t => t.classList.remove('nova-tab--drag-over'));
+      tabEl.classList.remove('bharat-tab--dragging');
+      document.querySelectorAll('.bharat-tab--drag-over').forEach(t => t.classList.remove('bharat-tab--drag-over'));
     });
 
     tabEl.addEventListener('dragover', (e) => {
       e.preventDefault();
-      tabEl.classList.add('nova-tab--drag-over');
+      tabEl.classList.add('bharat-tab--drag-over');
     });
 
     tabEl.addEventListener('dragleave', () => {
-      tabEl.classList.remove('nova-tab--drag-over');
+      tabEl.classList.remove('bharat-tab--drag-over');
     });
 
     tabEl.addEventListener('drop', (e) => {
       e.preventDefault();
-      tabEl.classList.remove('nova-tab--drag-over');
+      tabEl.classList.remove('bharat-tab--drag-over');
       const draggedId = parseInt(e.dataTransfer.getData('text/plain'));
       this.reorderTab(draggedId, tab.id);
     });
@@ -126,24 +127,24 @@ class TabManager {
     tab.suspended = false;
 
     // Update tab UI
-    document.querySelectorAll('.nova-tab').forEach(t => {
-      t.classList.toggle('nova-tab--active', parseInt(t.dataset.tabId) === id);
+    document.querySelectorAll('.bharat-tab').forEach(t => {
+      t.classList.toggle('bharat-tab--active', parseInt(t.dataset.tabId) === id);
     });
 
     // Delegate content visibility to app controller (handles webviews)
-    if (window.novaApp && window.novaApp.onTabSwitch) {
-      window.novaApp.onTabSwitch(id);
+    if (window.bharatApp && window.bharatApp.onTabSwitch) {
+      window.bharatApp.onTabSwitch(id);
     } else {
       // Fallback: basic visibility toggle using CSS classes
-      document.getElementById('newTabPage').classList.remove('nova-newtab--active');
-      document.getElementById('gameCenter').classList.remove('nova-games--active');
-      document.getElementById('settingsPage').classList.remove('nova-settings--active');
-      document.getElementById('gameView').classList.remove('nova-game-view--active');
+      document.getElementById('newTabPage').classList.remove('bharat-newtab--active');
+      document.getElementById('gameCenter').classList.remove('bharat-games--active');
+      document.getElementById('settingsPage').classList.remove('bharat-settings--active');
+      document.getElementById('gameView').classList.remove('bharat-game-view--active');
 
-      if (tab.type === 'newtab') document.getElementById('newTabPage').classList.add('nova-newtab--active');
-      else if (tab.type === 'games') document.getElementById('gameCenter').classList.add('nova-games--active');
-      else if (tab.type === 'settings') document.getElementById('settingsPage').classList.add('nova-settings--active');
-      else if (tab.type === 'game-playing') document.getElementById('gameView').classList.add('nova-game-view--active');
+      if (tab.type === 'newtab') document.getElementById('newTabPage').classList.add('bharat-newtab--active');
+      else if (tab.type === 'games') document.getElementById('gameCenter').classList.add('bharat-games--active');
+      else if (tab.type === 'settings') document.getElementById('settingsPage').classList.add('bharat-settings--active');
+      else if (tab.type === 'game-playing') document.getElementById('gameView').classList.add('bharat-game-view--active');
     }
 
     this.startSuspensionTimers();
@@ -154,8 +155,8 @@ class TabManager {
     if (index === -1) return;
 
     // Destroy associated webview (kills Chromium renderer process)
-    if (window.novaApp && window.novaApp.destroyWebview) {
-      window.novaApp.destroyWebview(id);
+    if (window.bharatApp && window.bharatApp.destroyWebview) {
+      window.bharatApp.destroyWebview(id);
     }
 
     this.tabs.splice(index, 1);
@@ -201,8 +202,8 @@ class TabManager {
     scroll.innerHTML = '';
     this.tabs.forEach(tab => this.renderTab(tab));
     // Re-apply active state
-    document.querySelectorAll('.nova-tab').forEach(t => {
-      t.classList.toggle('nova-tab--active', parseInt(t.dataset.tabId) === this.activeTabId);
+    document.querySelectorAll('.bharat-tab').forEach(t => {
+      t.classList.toggle('bharat-tab--active', parseInt(t.dataset.tabId) === this.activeTabId);
     });
   }
 
@@ -215,8 +216,8 @@ class TabManager {
 
     const tabEl = document.querySelector(`[data-tab-id="${id}"]`);
     if (tabEl) {
-      if (title) tabEl.querySelector('.nova-tab__title').textContent = title;
-      if (favicon) tabEl.querySelector('.nova-tab__favicon').textContent = favicon;
+      if (title) tabEl.querySelector('.bharat-tab__title').textContent = title;
+      if (favicon) tabEl.querySelector('.bharat-tab__favicon').textContent = favicon;
     }
   }
 
@@ -238,7 +239,7 @@ class TabManager {
     tab.suspended = true;
     const tabEl = document.querySelector(`[data-tab-id="${id}"]`);
     if (tabEl) {
-      tabEl.classList.add('nova-tab--suspended');
+      tabEl.classList.add('bharat-tab--suspended');
     }
   }
 
@@ -257,9 +258,9 @@ class TabManager {
     
     if (this.is3DViewOpen) {
       this.render3DView();
-      view.classList.add('nova-3d-tabs--visible');
+      view.classList.add('bharat-3d-tabs--visible');
     } else {
-      view.classList.remove('nova-3d-tabs--visible');
+      view.classList.remove('bharat-3d-tabs--visible');
     }
   }
 
@@ -274,28 +275,28 @@ class TabManager {
 
     this.tabs.forEach((tab, i) => {
       const card = document.createElement('div');
-      card.className = `nova-3d-tab-card ${tab.id === this.activeTabId ? 'nova-3d-tab-card--active' : ''}`;
+      card.className = `bharat-3d-tab-card ${tab.id === this.activeTabId ? 'bharat-3d-tab-card--active' : ''}`;
       card.style.animationDelay = `${i * 0.05}s`;
       card.innerHTML = `
-        <div class="nova-3d-tab-card__preview" style="background: linear-gradient(135deg, ${colors[i % colors.length]}22, ${colors[(i + 1) % colors.length]}11);">
+        <div class="bharat-3d-tab-card__preview" style="background: linear-gradient(135deg, ${colors[i % colors.length]}22, ${colors[(i + 1) % colors.length]}11);">
           <span style="font-size: 48px; opacity: 0.3;">${tab.favicon}</span>
-          <div class="nova-3d-tab-card__preview-gradient"></div>
+          <div class="bharat-3d-tab-card__preview-gradient"></div>
         </div>
-        <div class="nova-3d-tab-card__info">
-          <div class="nova-3d-tab-card__favicon">${tab.favicon}</div>
-          <div class="nova-3d-tab-card__title">${tab.title}</div>
-          <button class="nova-3d-tab-card__close" data-close3d="${tab.id}">✕</button>
+        <div class="bharat-3d-tab-card__info">
+          <div class="bharat-3d-tab-card__favicon">${tab.favicon}</div>
+          <div class="bharat-3d-tab-card__title">${tab.title}</div>
+          <button class="bharat-3d-tab-card__close" data-close3d="${tab.id}">✕</button>
         </div>
       `;
 
       card.addEventListener('click', (e) => {
-        if (!e.target.closest('.nova-3d-tab-card__close')) {
+        if (!e.target.closest('.bharat-3d-tab-card__close')) {
           this.switchToTab(tab.id);
           this.toggle3DView();
         }
       });
 
-      card.querySelector('.nova-3d-tab-card__close').addEventListener('click', (e) => {
+      card.querySelector('.bharat-3d-tab-card__close').addEventListener('click', (e) => {
         e.stopPropagation();
         this.closeTab(tab.id);
         this.render3DView();
@@ -306,13 +307,13 @@ class TabManager {
 
     // Add "New Tab" card
     const newCard = document.createElement('div');
-    newCard.className = 'nova-3d-tab-card';
+    newCard.className = 'bharat-3d-tab-card';
     newCard.style.border = '2px dashed rgba(255,255,255,0.1)';
     newCard.style.display = 'flex';
     newCard.style.alignItems = 'center';
     newCard.style.justifyContent = 'center';
     newCard.innerHTML = `
-      <div style="text-align: center; color: var(--nova-text-tertiary);">
+      <div style="text-align: center; color: var(--bharat-text-tertiary);">
         <div style="font-size: 32px; margin-bottom: 8px;">+</div>
         <div style="font-size: 12px;">New Tab</div>
       </div>

@@ -1,23 +1,23 @@
 /* ============================================
-   NovaBrowser — Game Center Styles
+   Search Bharat - Game Center Styles
    ============================================ */
 
 /* ── Game Center Dashboard ── */
-.nova-games {
+.bharat-games {
   width: 100%;
   height: 100%;
   display: none;
   flex-direction: column;
-  background: var(--nova-bg-primary);
+  background: var(--bharat-bg-primary);
   position: relative;
   overflow: hidden;
 }
 
-.nova-games--active {
+.bharat-games--active {
   display: flex;
 }
 
-.nova-games__bg {
+.bharat-games__bg {
   position: absolute;
   top: 0;
   left: 0;
@@ -27,7 +27,7 @@
   pointer-events: none;
 }
 
-.nova-games__stars {
+.bharat-games__stars {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -43,33 +43,33 @@
     radial-gradient(1px 1px at 280px 20px, rgba(255,255,255,0.2), transparent),
     radial-gradient(2px 2px at 320px 100px, rgba(0,206,201,0.3), transparent);
   background-size: 350px 200px;
-  animation: nova-float 30s linear infinite;
+  animation: bharat-float 30s linear infinite;
 }
 
-.nova-games__header {
-  padding: var(--nova-space-2xl) var(--nova-space-2xl) var(--nova-space-lg);
+.bharat-games__header {
+  padding: var(--bharat-space-2xl) var(--bharat-space-2xl) var(--bharat-space-lg);
   text-align: center;
   position: relative;
   z-index: 1;
 }
 
-.nova-games__title {
-  font-family: var(--nova-font-display);
-  font-size: var(--nova-text-3xl);
+.bharat-games__title {
+  font-family: var(--bharat-font-display);
+  font-size: var(--bharat-text-3xl);
   font-weight: 800;
-  margin-bottom: var(--nova-space-sm);
+  margin-bottom: var(--bharat-space-sm);
 }
 
-.nova-games__subtitle {
-  color: var(--nova-text-secondary);
-  font-size: var(--nova-text-base);
+.bharat-games__subtitle {
+  color: var(--bharat-text-secondary);
+  font-size: var(--bharat-text-base);
 }
 
-.nova-games__grid {
+.bharat-games__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: var(--nova-space-lg);
-  padding: var(--nova-space-lg) var(--nova-space-2xl);
+  gap: var(--bharat-space-lg);
+  padding: var(--bharat-space-lg) var(--bharat-space-2xl);
   max-width: 1000px;
   margin: 0 auto;
   width: 100%;
@@ -77,23 +77,23 @@
   z-index: 1;
 }
 
-.nova-game-card {
+.bharat-game-card {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: var(--nova-radius-xl);
+  border-radius: var(--bharat-radius-xl);
   overflow: hidden;
   cursor: pointer;
-  transition: all var(--nova-duration-normal) var(--nova-ease-spring);
+  transition: all var(--bharat-duration-normal) var(--bharat-ease-spring);
   position: relative;
 }
 
-.nova-game-card:hover {
+.bharat-game-card:hover {
   transform: translateY(-8px) scale(1.02);
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-.nova-game-card__preview {
+.bharat-game-card__preview {
   height: 160px;
   position: relative;
   overflow: hidden;
@@ -102,26 +102,26 @@
   justify-content: center;
 }
 
-.nova-game-card__preview--runner {
+.bharat-game-card__preview--runner {
   background: linear-gradient(135deg, #1a0533, #0a0a2e);
 }
 
-.nova-game-card__preview--puzzle {
+.bharat-game-card__preview--puzzle {
   background: linear-gradient(135deg, #0a2e2e, #0a1a2e);
 }
 
-.nova-game-card__preview--strategy {
+.bharat-game-card__preview--strategy {
   background: linear-gradient(135deg, #2e1a0a, #1a0a2e);
 }
 
-.nova-game-card__preview-art {
+.bharat-game-card__preview-art {
   font-size: 64px;
   position: relative;
   z-index: 1;
-  animation: nova-float 3s ease-in-out infinite;
+  animation: bharat-float 3s ease-in-out infinite;
 }
 
-.nova-game-card__preview-glow {
+.bharat-game-card__preview-glow {
   position: absolute;
   width: 120px;
   height: 120px;
@@ -130,99 +130,99 @@
   opacity: 0.4;
 }
 
-.nova-game-card__preview--runner .nova-game-card__preview-glow {
-  background: var(--nova-accent-primary);
+.bharat-game-card__preview--runner .bharat-game-card__preview-glow {
+  background: var(--bharat-accent-primary);
 }
-.nova-game-card__preview--puzzle .nova-game-card__preview-glow {
-  background: var(--nova-accent-tertiary);
+.bharat-game-card__preview--puzzle .bharat-game-card__preview-glow {
+  background: var(--bharat-accent-tertiary);
 }
-.nova-game-card__preview--strategy .nova-game-card__preview-glow {
-  background: var(--nova-accent-warm);
+.bharat-game-card__preview--strategy .bharat-game-card__preview-glow {
+  background: var(--bharat-accent-warm);
 }
 
-.nova-game-card__badge {
+.bharat-game-card__badge {
   position: absolute;
-  top: var(--nova-space-md);
-  right: var(--nova-space-md);
+  top: var(--bharat-space-md);
+  right: var(--bharat-space-md);
   padding: 3px 10px;
-  border-radius: var(--nova-radius-full);
+  border-radius: var(--bharat-radius-full);
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-.nova-game-card__badge--new {
+.bharat-game-card__badge--new {
   background: rgba(108, 92, 231, 0.3);
-  color: var(--nova-accent-secondary);
+  color: var(--bharat-accent-secondary);
   border: 1px solid rgba(108, 92, 231, 0.3);
 }
 
-.nova-game-card__badge--popular {
+.bharat-game-card__badge--popular {
   background: rgba(253, 121, 168, 0.3);
-  color: var(--nova-accent-hot);
+  color: var(--bharat-accent-hot);
   border: 1px solid rgba(253, 121, 168, 0.3);
 }
 
-.nova-game-card__info {
-  padding: var(--nova-space-lg);
+.bharat-game-card__info {
+  padding: var(--bharat-space-lg);
 }
 
-.nova-game-card__name {
-  font-family: var(--nova-font-display);
+.bharat-game-card__name {
+  font-family: var(--bharat-font-display);
   font-weight: 700;
-  font-size: var(--nova-text-lg);
-  margin-bottom: var(--nova-space-xs);
+  font-size: var(--bharat-text-lg);
+  margin-bottom: var(--bharat-space-xs);
 }
 
-.nova-game-card__desc {
-  font-size: var(--nova-text-xs);
-  color: var(--nova-text-tertiary);
+.bharat-game-card__desc {
+  font-size: var(--bharat-text-xs);
+  color: var(--bharat-text-tertiary);
   line-height: 1.6;
-  margin-bottom: var(--nova-space-md);
+  margin-bottom: var(--bharat-space-md);
 }
 
-.nova-game-card__meta {
+.bharat-game-card__meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.nova-game-card__tags {
+.bharat-game-card__tags {
   display: flex;
-  gap: var(--nova-space-xs);
+  gap: var(--bharat-space-xs);
 }
 
-.nova-game-card__tag {
+.bharat-game-card__tag {
   padding: 2px 8px;
   background: rgba(255, 255, 255, 0.04);
-  border-radius: var(--nova-radius-sm);
+  border-radius: var(--bharat-radius-sm);
   font-size: 10px;
-  color: var(--nova-text-tertiary);
+  color: var(--bharat-text-tertiary);
 }
 
-.nova-game-card__play-btn {
+.bharat-game-card__play-btn {
   width: 36px;
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: var(--nova-accent-primary);
+  background: var(--bharat-accent-primary);
   color: white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  transition: all var(--nova-duration-fast);
+  transition: all var(--bharat-duration-fast);
 }
 
-.nova-game-card__play-btn:hover {
+.bharat-game-card__play-btn:hover {
   transform: scale(1.1);
   box-shadow: 0 0 20px rgba(108, 92, 231, 0.5);
 }
 
 /* ── Game Canvas (Shared) ── */
-.nova-game-view {
+.bharat-game-view {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -230,67 +230,67 @@
   left: 0;
   display: none;
   flex-direction: column;
-  background: var(--nova-bg-primary);
+  background: var(--bharat-bg-primary);
   z-index: 10;
 }
 
-.nova-game-view--active {
+.bharat-game-view--active {
   display: flex;
 }
 
-.nova-game-view__header {
+.bharat-game-view__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--nova-space-md) var(--nova-space-lg);
+  padding: var(--bharat-space-md) var(--bharat-space-lg);
   background: rgba(10, 10, 15, 0.9);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   z-index: 2;
 }
 
-.nova-game-view__back {
+.bharat-game-view__back {
   display: flex;
   align-items: center;
-  gap: var(--nova-space-sm);
+  gap: var(--bharat-space-sm);
   background: transparent;
   border: none;
-  color: var(--nova-text-secondary);
+  color: var(--bharat-text-secondary);
   cursor: pointer;
-  font-family: var(--nova-font-body);
-  font-size: var(--nova-text-sm);
-  transition: all var(--nova-duration-fast);
+  font-family: var(--bharat-font-body);
+  font-size: var(--bharat-text-sm);
+  transition: all var(--bharat-duration-fast);
 }
 
-.nova-game-view__back:hover {
-  color: var(--nova-text-primary);
+.bharat-game-view__back:hover {
+  color: var(--bharat-text-primary);
 }
 
-.nova-game-view__title {
-  font-family: var(--nova-font-display);
+.bharat-game-view__title {
+  font-family: var(--bharat-font-display);
   font-weight: 600;
-  font-size: var(--nova-text-md);
+  font-size: var(--bharat-text-md);
 }
 
-.nova-game-view__score {
+.bharat-game-view__score {
   display: flex;
   align-items: center;
-  gap: var(--nova-space-md);
-  font-family: var(--nova-font-mono);
-  font-size: var(--nova-text-sm);
+  gap: var(--bharat-space-md);
+  font-family: var(--bharat-font-mono);
+  font-size: var(--bharat-text-sm);
 }
 
-.nova-game-view__score-label {
-  color: var(--nova-text-tertiary);
-  font-size: var(--nova-text-xs);
+.bharat-game-view__score-label {
+  color: var(--bharat-text-tertiary);
+  font-size: var(--bharat-text-xs);
 }
 
-.nova-game-view__score-value {
-  color: var(--nova-accent-primary);
+.bharat-game-view__score-value {
+  color: var(--bharat-accent-primary);
   font-weight: 600;
 }
 
-.nova-game-view__canvas-wrapper {
+.bharat-game-view__canvas-wrapper {
   flex: 1;
   display: flex;
   align-items: center;
@@ -299,13 +299,13 @@
   overflow: hidden;
 }
 
-.nova-game-view__canvas {
+.bharat-game-view__canvas {
   display: block;
   image-rendering: pixelated;
 }
 
 /* ── Game Over Screen ── */
-.nova-game-over {
+.bharat-game-over {
   position: absolute;
   top: 0;
   left: 0;
@@ -319,44 +319,44 @@
   z-index: 5;
 }
 
-.nova-game-over--visible {
+.bharat-game-over--visible {
   display: flex;
-  animation: nova-fade-in 0.3s var(--nova-ease-smooth) forwards;
+  animation: bharat-fade-in 0.3s var(--bharat-ease-smooth) forwards;
 }
 
-.nova-game-over__content {
+.bharat-game-over__content {
   text-align: center;
-  animation: nova-scale-in 0.4s var(--nova-ease-spring) forwards;
+  animation: bharat-scale-in 0.4s var(--bharat-ease-spring) forwards;
 }
 
-.nova-game-over__title {
-  font-family: var(--nova-font-display);
-  font-size: var(--nova-text-3xl);
+.bharat-game-over__title {
+  font-family: var(--bharat-font-display);
+  font-size: var(--bharat-text-3xl);
   font-weight: 800;
-  margin-bottom: var(--nova-space-md);
+  margin-bottom: var(--bharat-space-md);
 }
 
-.nova-game-over__score {
-  font-family: var(--nova-font-mono);
-  font-size: var(--nova-text-xl);
-  color: var(--nova-accent-primary);
-  margin-bottom: var(--nova-space-xs);
+.bharat-game-over__score {
+  font-family: var(--bharat-font-mono);
+  font-size: var(--bharat-text-xl);
+  color: var(--bharat-accent-primary);
+  margin-bottom: var(--bharat-space-xs);
 }
 
-.nova-game-over__best {
-  font-size: var(--nova-text-sm);
-  color: var(--nova-text-tertiary);
-  margin-bottom: var(--nova-space-xl);
+.bharat-game-over__best {
+  font-size: var(--bharat-text-sm);
+  color: var(--bharat-text-tertiary);
+  margin-bottom: var(--bharat-space-xl);
 }
 
-.nova-game-over__actions {
+.bharat-game-over__actions {
   display: flex;
-  gap: var(--nova-space-md);
+  gap: var(--bharat-space-md);
   justify-content: center;
 }
 
 /* ── Pause Screen ── */
-.nova-game-pause {
+.bharat-game-pause {
   position: absolute;
   top: 0;
   left: 0;
@@ -370,38 +370,38 @@
   z-index: 4;
 }
 
-.nova-game-pause--visible {
+.bharat-game-pause--visible {
   display: flex;
 }
 
-.nova-game-pause__text {
-  font-family: var(--nova-font-display);
-  font-size: var(--nova-text-2xl);
+.bharat-game-pause__text {
+  font-family: var(--bharat-font-display);
+  font-size: var(--bharat-text-2xl);
   font-weight: 700;
-  animation: nova-pulse 2s ease-in-out infinite;
+  animation: bharat-pulse 2s ease-in-out infinite;
 }
 
 /* ── Back to games button ── */
-.nova-games__back {
+.bharat-games__back {
   position: absolute;
-  top: var(--nova-space-lg);
-  left: var(--nova-space-lg);
+  top: var(--bharat-space-lg);
+  left: var(--bharat-space-lg);
   z-index: 2;
   display: flex;
   align-items: center;
-  gap: var(--nova-space-sm);
-  padding: var(--nova-space-sm) var(--nova-space-md);
+  gap: var(--bharat-space-sm);
+  padding: var(--bharat-space-sm) var(--bharat-space-md);
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--nova-radius-full);
-  color: var(--nova-text-secondary);
+  border-radius: var(--bharat-radius-full);
+  color: var(--bharat-text-secondary);
   cursor: pointer;
-  font-family: var(--nova-font-body);
-  font-size: var(--nova-text-xs);
-  transition: all var(--nova-duration-fast);
+  font-family: var(--bharat-font-body);
+  font-size: var(--bharat-text-xs);
+  transition: all var(--bharat-duration-fast);
 }
 
-.nova-games__back:hover {
+.bharat-games__back:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: var(--nova-text-primary);
+  color: var(--bharat-text-primary);
 }

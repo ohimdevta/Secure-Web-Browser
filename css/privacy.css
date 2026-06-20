@@ -1,0 +1,359 @@
+/* ============================================
+   Search Bharat - Lock Screen, Extensions, VPN
+   ============================================ */
+
+/* ── Lock Screen ── */
+.bharat-lockscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0f;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.bharat-lockscreen--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.bharat-lockscreen__bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 153, 51, 0.15), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(19, 136, 8, 0.15), transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(0, 0, 128, 0.1), transparent 60%);
+  animation: lockBgShift 12s infinite alternate ease-in-out;
+}
+
+@keyframes lockBgShift {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.1) rotate(2deg); }
+}
+
+.bharat-lockscreen__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 48px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  min-width: 380px;
+  animation: lockFadeIn 0.6s ease forwards;
+}
+
+@keyframes lockFadeIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.bharat-lockscreen__logo {
+  font-size: 64px;
+  margin-bottom: 16px;
+  animation: lockPulse 3s ease-in-out infinite;
+}
+
+@keyframes lockPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.bharat-lockscreen__title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FF9933, #FFFFFF, #138808);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.bharat-lockscreen__subtitle {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 28px;
+}
+
+.bharat-lockscreen__input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.bharat-lockscreen__input {
+  flex: 1;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #f0f0f8;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  letter-spacing: 4px;
+}
+
+.bharat-lockscreen__input:focus {
+  border-color: #FF9933;
+  box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.2);
+}
+
+.bharat-lockscreen__submit {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #FF9933, #138808);
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.bharat-lockscreen__submit:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 153, 51, 0.4);
+}
+
+.bharat-lockscreen__error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  min-height: 20px;
+  margin: 0;
+}
+
+.bharat-lockscreen__setup {
+  color: #6a6a82;
+  font-size: 0.75rem;
+  margin-top: 8px;
+}
+
+/* ── Extension Store Section ── */
+.bharat-extensions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.bharat-extension-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.bharat-extension-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.bharat-extension-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.bharat-extension-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.bharat-extension-card__name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.bharat-extension-card__author {
+  font-size: 0.7rem;
+  color: #6a6a82;
+}
+
+.bharat-extension-card__desc {
+  font-size: 0.8rem;
+  color: #a0a0b8;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.bharat-extension-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bharat-extension-card__status {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.bharat-extension-card__status--active {
+  background: rgba(0, 184, 148, 0.15);
+  color: #00b894;
+}
+
+.bharat-extension-card__status--inactive {
+  background: rgba(255, 255, 255, 0.05);
+  color: #6a6a82;
+}
+
+/* ── VPN Section ── */
+.bharat-vpn-panel {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 12px;
+  text-align: center;
+}
+
+.bharat-vpn-panel__status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.bharat-vpn-panel__shield {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  transition: all 0.5s ease;
+}
+
+.bharat-vpn-panel__shield--off {
+  background: rgba(255, 107, 107, 0.1);
+  border: 2px solid rgba(255, 107, 107, 0.3);
+}
+
+.bharat-vpn-panel__shield--on {
+  background: rgba(0, 184, 148, 0.15);
+  border: 2px solid rgba(0, 184, 148, 0.4);
+  box-shadow: 0 0 30px rgba(0, 184, 148, 0.2);
+  animation: vpnGlow 2s ease-in-out infinite alternate;
+}
+
+.bharat-vpn-panel__shield--connecting {
+  background: rgba(254, 188, 46, 0.15);
+  border: 2px solid rgba(254, 188, 46, 0.4);
+  animation: vpnSpin 1s linear infinite;
+}
+
+@keyframes vpnSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes vpnGlow {
+  0% { box-shadow: 0 0 20px rgba(0, 184, 148, 0.2); }
+  100% { box-shadow: 0 0 40px rgba(0, 184, 148, 0.4); }
+}
+
+.bharat-vpn-panel__label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.bharat-vpn-panel__ip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: #a0a0b8;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+}
+
+.bharat-vpn-panel__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bharat-vpn-panel__btn--connect {
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  color: white;
+}
+
+.bharat-vpn-panel__btn--connect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 184, 148, 0.3);
+}
+
+.bharat-vpn-panel__btn--disconnect {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+}
+
+.bharat-vpn-panel__btn--disconnect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+}
+
+.bharat-vpn-panel__locations {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.bharat-vpn-panel__location {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #a0a0b8;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bharat-vpn-panel__location:hover,
+.bharat-vpn-panel__location--active {
+  background: rgba(0, 184, 148, 0.15);
+  border-color: #00b894;
+  color: #00b894;
+}

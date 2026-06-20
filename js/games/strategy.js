@@ -1,5 +1,5 @@
 /* ============================================
-   NovaBrowser — Space Strategy Game
+   Search Bharat - Space Strategy Game
    Tower defense mini-game in space
    ============================================ */
 
@@ -10,7 +10,7 @@ class SpaceStrategy {
     this.running = false;
     this.paused = false;
     this.score = 0;
-    this.bestScore = parseInt(localStorage.getItem('nova-strategy-best') || '0');
+    this.bestScore = parseInt(localStorage.getItem('bharat-strategy-best') || '0');
     this.frameId = null;
 
     // Game state
@@ -133,8 +133,8 @@ class SpaceStrategy {
     this.paused = false;
     this.selectedTowerType = 0;
 
-    document.getElementById('gameOver').classList.remove('nova-game-over--visible');
-    document.getElementById('gamePause').classList.remove('nova-game-pause--visible');
+    document.getElementById('gameOver').classList.remove('bharat-game-over--visible');
+    document.getElementById('gamePause').classList.remove('bharat-game-pause--visible');
 
     this.updateScoreUI();
     this.loop();
@@ -666,7 +666,7 @@ class SpaceStrategy {
     this.score = this.wave * 100 + this.towers.length * 10;
     if (this.score > this.bestScore) {
       this.bestScore = this.score;
-      localStorage.setItem('nova-strategy-best', this.bestScore);
+      localStorage.setItem('bharat-strategy-best', this.bestScore);
     }
 
     document.getElementById('gameOverScore').textContent = `Wave ${this.wave} • Score: ${this.score}`;
@@ -674,14 +674,14 @@ class SpaceStrategy {
     document.getElementById('gameBest').textContent = this.bestScore;
 
     setTimeout(() => {
-      document.getElementById('gameOver').classList.add('nova-game-over--visible');
+      document.getElementById('gameOver').classList.add('bharat-game-over--visible');
     }, 500);
   }
 
   togglePause() {
     if (!this.running) return;
     this.paused = !this.paused;
-    document.getElementById('gamePause').classList.toggle('nova-game-pause--visible', this.paused);
+    document.getElementById('gamePause').classList.toggle('bharat-game-pause--visible', this.paused);
   }
 
   updateScoreUI() {

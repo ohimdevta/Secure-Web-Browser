@@ -1,8 +1,8 @@
 /* ============================================
-   NovaBrowser — Command Palette
+   Search Bharat - Command Palette
    ============================================ */
 
-.nova-command-palette {
+.bharat-command-palette {
   position: fixed;
   top: 0;
   left: 0;
@@ -17,186 +17,186 @@
   backdrop-filter: blur(8px);
 }
 
-.nova-command-palette--visible {
+.bharat-command-palette--visible {
   display: flex;
-  animation: nova-fade-in 0.15s var(--nova-ease-smooth) forwards;
+  animation: bharat-fade-in 0.15s var(--bharat-ease-smooth) forwards;
 }
 
-.nova-command-palette__container {
+.bharat-command-palette__container {
   width: 100%;
   max-width: 600px;
   background: rgba(18, 18, 26, 0.98);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--nova-radius-xl);
-  box-shadow: var(--nova-shadow-xl), 0 0 60px rgba(108, 92, 231, 0.1);
+  border-radius: var(--bharat-radius-xl);
+  box-shadow: var(--bharat-shadow-xl), 0 0 60px rgba(108, 92, 231, 0.1);
   overflow: hidden;
-  animation: nova-slide-down 0.2s var(--nova-ease-spring) forwards;
+  animation: bharat-slide-down 0.2s var(--bharat-ease-spring) forwards;
 }
 
-.nova-command-palette__search {
+.bharat-command-palette__search {
   display: flex;
   align-items: center;
-  padding: var(--nova-space-md) var(--nova-space-lg);
+  padding: var(--bharat-space-md) var(--bharat-space-lg);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  gap: var(--nova-space-md);
+  gap: var(--bharat-space-md);
 }
 
-.nova-command-palette__search-icon {
-  color: var(--nova-accent-primary);
+.bharat-command-palette__search-icon {
+  color: var(--bharat-accent-primary);
   font-size: 18px;
   flex-shrink: 0;
 }
 
-.nova-command-palette__input {
+.bharat-command-palette__input {
   flex: 1;
   background: transparent;
   border: none;
-  color: var(--nova-text-primary);
-  font-family: var(--nova-font-body);
-  font-size: var(--nova-text-md);
+  color: var(--bharat-text-primary);
+  font-family: var(--bharat-font-body);
+  font-size: var(--bharat-text-md);
   outline: none;
 }
 
-.nova-command-palette__input::placeholder {
-  color: var(--nova-text-tertiary);
+.bharat-command-palette__input::placeholder {
+  color: var(--bharat-text-tertiary);
 }
 
-.nova-command-palette__badge {
+.bharat-command-palette__badge {
   padding: 2px 8px;
   background: rgba(108, 92, 231, 0.2);
-  color: var(--nova-accent-secondary);
-  border-radius: var(--nova-radius-sm);
-  font-size: var(--nova-text-xs);
+  color: var(--bharat-accent-secondary);
+  border-radius: var(--bharat-radius-sm);
+  font-size: var(--bharat-text-xs);
   font-weight: 600;
   flex-shrink: 0;
 }
 
-.nova-command-palette__results {
+.bharat-command-palette__results {
   max-height: 400px;
   overflow-y: auto;
-  padding: var(--nova-space-xs);
+  padding: var(--bharat-space-xs);
 }
 
-.nova-command-palette__group {
-  margin-bottom: var(--nova-space-xs);
+.bharat-command-palette__group {
+  margin-bottom: var(--bharat-space-xs);
 }
 
-.nova-command-palette__group-label {
-  padding: var(--nova-space-sm) var(--nova-space-md);
-  font-size: var(--nova-text-xs);
-  color: var(--nova-text-tertiary);
+.bharat-command-palette__group-label {
+  padding: var(--bharat-space-sm) var(--bharat-space-md);
+  font-size: var(--bharat-text-xs);
+  color: var(--bharat-text-tertiary);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-.nova-command-palette__item {
+.bharat-command-palette__item {
   display: flex;
   align-items: center;
-  gap: var(--nova-space-md);
-  padding: var(--nova-space-sm) var(--nova-space-md);
-  border-radius: var(--nova-radius-md);
+  gap: var(--bharat-space-md);
+  padding: var(--bharat-space-sm) var(--bharat-space-md);
+  border-radius: var(--bharat-radius-md);
   cursor: pointer;
-  transition: all var(--nova-duration-fast) var(--nova-ease-smooth);
+  transition: all var(--bharat-duration-fast) var(--bharat-ease-smooth);
 }
 
-.nova-command-palette__item:hover,
-.nova-command-palette__item--selected {
+.bharat-command-palette__item:hover,
+.bharat-command-palette__item--selected {
   background: rgba(108, 92, 231, 0.12);
 }
 
-.nova-command-palette__item-icon {
+.bharat-command-palette__item-icon {
   width: 32px;
   height: 32px;
-  border-radius: var(--nova-radius-md);
+  border-radius: var(--bharat-radius-md);
   background: rgba(255, 255, 255, 0.04);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
   flex-shrink: 0;
-  transition: all var(--nova-duration-fast);
+  transition: all var(--bharat-duration-fast);
 }
 
-.nova-command-palette__item:hover .nova-command-palette__item-icon {
+.bharat-command-palette__item:hover .bharat-command-palette__item-icon {
   background: rgba(108, 92, 231, 0.2);
 }
 
-.nova-command-palette__item-text {
+.bharat-command-palette__item-text {
   flex: 1;
   min-width: 0;
 }
 
-.nova-command-palette__item-title {
-  font-size: var(--nova-text-sm);
-  color: var(--nova-text-primary);
+.bharat-command-palette__item-title {
+  font-size: var(--bharat-text-sm);
+  color: var(--bharat-text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.nova-command-palette__item-desc {
-  font-size: var(--nova-text-xs);
-  color: var(--nova-text-tertiary);
+.bharat-command-palette__item-desc {
+  font-size: var(--bharat-text-xs);
+  color: var(--bharat-text-tertiary);
 }
 
-.nova-command-palette__item-shortcut {
-  font-family: var(--nova-font-mono);
-  font-size: var(--nova-text-xs);
-  color: var(--nova-text-tertiary);
+.bharat-command-palette__item-shortcut {
+  font-family: var(--bharat-font-mono);
+  font-size: var(--bharat-text-xs);
+  color: var(--bharat-text-tertiary);
   flex-shrink: 0;
   display: flex;
   gap: 4px;
 }
 
-.nova-command-palette__item-shortcut kbd {
+.bharat-command-palette__item-shortcut kbd {
   padding: 2px 6px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 4px;
-  font-family: var(--nova-font-mono);
+  font-family: var(--bharat-font-mono);
   font-size: 10px;
 }
 
-.nova-command-palette__empty {
-  padding: var(--nova-space-xl);
+.bharat-command-palette__empty {
+  padding: var(--bharat-space-xl);
   text-align: center;
-  color: var(--nova-text-tertiary);
-  font-size: var(--nova-text-sm);
+  color: var(--bharat-text-tertiary);
+  font-size: var(--bharat-text-sm);
 }
 
-.nova-command-palette__footer {
+.bharat-command-palette__footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--nova-space-sm) var(--nova-space-lg);
+  padding: var(--bharat-space-sm) var(--bharat-space-lg);
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-  font-size: var(--nova-text-xs);
-  color: var(--nova-text-tertiary);
+  font-size: var(--bharat-text-xs);
+  color: var(--bharat-text-tertiary);
 }
 
-.nova-command-palette__footer-keys {
+.bharat-command-palette__footer-keys {
   display: flex;
-  gap: var(--nova-space-md);
+  gap: var(--bharat-space-md);
 }
 
-.nova-command-palette__footer-key {
+.bharat-command-palette__footer-key {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.nova-command-palette__footer-key kbd {
+.bharat-command-palette__footer-key kbd {
   padding: 1px 5px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 3px;
-  font-family: var(--nova-font-mono);
+  font-family: var(--bharat-font-mono);
   font-size: 10px;
 }
 
 /* ── Highlight match ── */
-.nova-command-palette__highlight {
-  color: var(--nova-accent-primary);
+.bharat-command-palette__highlight {
+  color: var(--bharat-accent-primary);
   font-weight: 600;
 }

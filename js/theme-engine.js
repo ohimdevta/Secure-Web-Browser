@@ -1,19 +1,19 @@
 /* ============================================
-   NovaBrowser — Theme Engine
+   Search Bharat - Theme Engine
    AI-powered dynamic theming
    ============================================ */
 
 class ThemeEngine {
   constructor() {
-    this.themes = ['midnight', 'aurora', 'sunset', 'forest', 'cosmos', 'cyber'];
-    this.currentTheme = 'midnight';
+    this.themes = ['indian-flag', 'india-map', 'bharat-mata', 'greenery-of-india', 'mountains-of-india'];
+    this.currentTheme = 'indian-flag';
     this.isDynamic = true;
     this.dynamicInterval = null;
   }
 
   init() {
-    const saved = localStorage.getItem('nova-theme');
-    const dynamicPref = localStorage.getItem('nova-dynamic-theme');
+    const saved = localStorage.getItem('bharat-theme');
+    const dynamicPref = localStorage.getItem('bharat-dynamic-theme');
     
     if (dynamicPref !== null) {
       this.isDynamic = dynamicPref === 'true';
@@ -36,14 +36,26 @@ class ThemeEngine {
     document.documentElement.setAttribute('data-theme', theme);
     
     // Update swatches
-    document.querySelectorAll('.nova-theme-swatch').forEach(s => {
-      s.classList.toggle('nova-theme-swatch--active', s.dataset.theme === theme);
+    document.querySelectorAll('.bharat-theme-swatch').forEach(s => {
+      s.classList.toggle('bharat-theme-swatch--active', s.dataset.theme === theme);
     });
 
+    // ── Swap background video with crossfade ──
+    const video = document.getElementById('themeBgVideo');
+    if (video) {
+      video.classList.add('bharat-video-fade');
+      setTimeout(() => {
+        video.src = `videos/${theme}.mp4`;
+        video.load();
+        video.play().catch(() => {}); // ignore autoplay policy errors
+        video.classList.remove('bharat-video-fade');
+      }, 400);
+    }
+
     if (save) {
-      localStorage.setItem('nova-theme', theme);
+      localStorage.setItem('bharat-theme', theme);
       this.isDynamic = false;
-      localStorage.setItem('nova-dynamic-theme', 'false');
+      localStorage.setItem('bharat-dynamic-theme', 'false');
       this.updateToggleUI();
       if (this.dynamicInterval) {
         clearInterval(this.dynamicInterval);
@@ -57,17 +69,15 @@ class ThemeEngine {
     let theme;
 
     if (hour >= 6 && hour < 10) {
-      theme = 'aurora';       // Morning - cool, refreshing
+      theme = 'greenery-of-india';       // Morning - fresh and bright
     } else if (hour >= 10 && hour < 14) {
-      theme = 'forest';       // Midday - focused, natural
-    } else if (hour >= 14 && hour < 17) {
-      theme = 'cosmos';       // Afternoon - creative, energetic
-    } else if (hour >= 17 && hour < 20) {
-      theme = 'sunset';       // Evening - warm, winding down
-    } else if (hour >= 20 && hour < 23) {
-      theme = 'midnight';     // Night - dark, comfortable
+      theme = 'indian-flag';             // Midday - patriotic and vibrant
+    } else if (hour >= 14 && hour < 18) {
+      theme = 'bharat-mata';             // Afternoon - warm and golden
+    } else if (hour >= 18 && hour < 21) {
+      theme = 'india-map';               // Evening - majestic and calm
     } else {
-      theme = 'cyber';        // Late night - minimal eye strain
+      theme = 'mountains-of-india';      // Night - cool and icy
     }
 
     this.setTheme(theme, false);
@@ -75,7 +85,7 @@ class ThemeEngine {
 
   toggleDynamic() {
     this.isDynamic = !this.isDynamic;
-    localStorage.setItem('nova-dynamic-theme', String(this.isDynamic));
+    localStorage.setItem('bharat-dynamic-theme', String(this.isDynamic));
     
     if (this.isDynamic) {
       this.applyDynamicTheme();
@@ -93,7 +103,7 @@ class ThemeEngine {
   updateToggleUI() {
     const toggle = document.getElementById('dynamicThemeToggle');
     if (toggle) {
-      toggle.classList.toggle('nova-toggle--active', this.isDynamic);
+      toggle.classList.toggle('bharat-toggle--active', this.isDynamic);
     }
   }
 

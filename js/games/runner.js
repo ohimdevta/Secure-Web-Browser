@@ -1,5 +1,5 @@
 /* ============================================
-   NovaBrowser — Anti-Gravity Runner Game
+   Search Bharat - Anti-Gravity Runner Game
    Endless runner with space/anti-gravity theme
    ============================================ */
 
@@ -10,7 +10,7 @@ class AntiGravityRunner {
     this.running = false;
     this.paused = false;
     this.score = 0;
-    this.bestScore = parseInt(localStorage.getItem('nova-runner-best') || '0');
+    this.bestScore = parseInt(localStorage.getItem('bharat-runner-best') || '0');
     this.speed = 3;
     this.gravity = 0;
     this.frameId = null;
@@ -111,8 +111,8 @@ class AntiGravityRunner {
     this.running = true;
     this.paused = false;
     
-    document.getElementById('gameOver').classList.remove('nova-game-over--visible');
-    document.getElementById('gamePause').classList.remove('nova-game-pause--visible');
+    document.getElementById('gameOver').classList.remove('bharat-game-over--visible');
+    document.getElementById('gamePause').classList.remove('bharat-game-pause--visible');
     
     this.updateScoreUI();
     this.loop();
@@ -516,7 +516,7 @@ class AntiGravityRunner {
 
     if (this.score > this.bestScore) {
       this.bestScore = this.score;
-      localStorage.setItem('nova-runner-best', this.bestScore);
+      localStorage.setItem('bharat-runner-best', this.bestScore);
     }
 
     // Explosion
@@ -552,14 +552,14 @@ class AntiGravityRunner {
     document.getElementById('gameOverBest').textContent = `Best: ${this.bestScore}m`;
     
     setTimeout(() => {
-      document.getElementById('gameOver').classList.add('nova-game-over--visible');
+      document.getElementById('gameOver').classList.add('bharat-game-over--visible');
     }, 500);
   }
 
   togglePause() {
     if (!this.running) return;
     this.paused = !this.paused;
-    document.getElementById('gamePause').classList.toggle('nova-game-pause--visible', this.paused);
+    document.getElementById('gamePause').classList.toggle('bharat-game-pause--visible', this.paused);
     if (!this.paused) this.loop();
   }
 

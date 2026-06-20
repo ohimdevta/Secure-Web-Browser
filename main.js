@@ -1,11 +1,12 @@
 /* ============================================
-   NovaBrowser — Electron Main Process
+   Search Bharat - Electron Main Process
    This is the Chromium "browser process" that
    manages windows, webviews, and IPC.
    ============================================ */
 
-const { app, BrowserWindow, ipcMain, session, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, session, Menu, net, dialog } = require('electron');
 const path = require('path');
+const fs = require('fs');
 
 let mainWindow = null;
 
@@ -39,6 +40,68 @@ function createWindow() {
 
   // Remove default menu
   Menu.setApplicationMenu(null);
+
+  // VPN & Privacy IPC handlers
+  ipcMain.handle('set-proxy', async (event, location) => {
+    console.log(`Setting proxy for location: ${location}`);
+    
+    try {
+      // In a real app, you'd filter by country code (location)
+      // For this demo, we'll fetch a list of working SOCKS5 proxies
+      const response = await net.fetch('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks5&timeout=5000&country=all&ssl=all&anonymity=all');
+      const text = await response.text();
+      const proxies = text.split('\r\n').filter(p => p.trim());
+      
+      if (proxies.length === 0) {
+        throw new Error('No proxies available');
+      }
+
+      // Pick a random proxy from the list for better success rate
+      const proxy = proxies[Math.floor(Math.random() * Math.min(10, proxies.length))];
+      const proxyRule = `socks5://${proxy}`;
+      
+      await session.defaultSession.setProxy({ proxyRules: proxyRule });
+      console.log(`VPN connected to ${proxyRule}`);
+      return { success: true, proxy: proxy };
+    } catch (e) {
+      console.error('Failed to set proxy:', e);
+      // Fallback to direct if proxy fails
+      await session.defaultSession.setProxy({ proxyRules: 'direct://' });
+      return { success: false, error: e.message };
+    }
+  });
+
+  ipcMain.on('clear-proxy', async () => {
+    try {
+      await session.defaultSession.setProxy({ proxyRules: 'direct://' });
+      console.log('VPN disconnected');
+    } catch (e) {}
+  });
+
+  ipcMain.on('set-webrtc', (event, allow) => {
+    session.defaultSession.setWebRTCIPHandlingPolicy(
+      allow ? 'default' : 'disable-non-proxied-udp'
+    );
+  });
+
+  // Screenshot IPC handler
+  ipcMain.handle('take-screenshot', async () => {
+    try {
+      const image = await mainWindow.webContents.capturePage();
+      const pngBuffer = image.toPNG();
+      
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+      const desktopPath = app.getPath('desktop');
+      const fileName = `SearchBharat_Screenshot_${timestamp}.png`;
+      const filePath = path.join(desktopPath, fileName);
+      
+      fs.writeFileSync(filePath, pngBuffer);
+      return { success: true, path: filePath, fileName: fileName };
+    } catch (e) {
+      console.error('Screenshot failed:', e);
+      return { success: false, error: e.message };
+    }
+  });
 
   // Configure session for ad/tracker blocking
   setupContentBlocking();

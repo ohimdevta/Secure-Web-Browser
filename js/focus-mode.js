@@ -1,5 +1,5 @@
 /* ============================================
-   NovaBrowser — Focus Mode
+   Search Bharat - Focus Mode
    Distraction-free reading experience
    ============================================ */
 
@@ -21,14 +21,14 @@ class FocusMode {
 
   toggle() {
     this.isActive = !this.isActive;
-    const browser = document.getElementById('novaBrowser');
+    const browser = document.getElementById('bharatBrowser');
     
     if (this.isActive) {
-      browser.classList.add('nova-browser--focus-mode');
-      novaApp.showToast('Focus Mode enabled — UI hidden for distraction-free browsing', '👁');
+      browser.classList.add('bharat-browser--focus-mode');
+      bharatApp.showToast('Focus Mode enabled — UI hidden for distraction-free browsing', '👁');
     } else {
-      browser.classList.remove('nova-browser--focus-mode');
-      novaApp.showToast('Focus Mode disabled', '👁');
+      browser.classList.remove('bharat-browser--focus-mode');
+      bharatApp.showToast('Focus Mode disabled', '👁');
     }
   }
 

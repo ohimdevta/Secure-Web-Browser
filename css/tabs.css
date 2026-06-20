@@ -1,9 +1,9 @@
 /* ============================================
-   NovaBrowser — 3D Tab Management
+   Search Bharat - 3D Tab Management
    ============================================ */
 
 /* ── 3D Tab Switcher Overlay ── */
-.nova-3d-tabs {
+.bharat-3d-tabs {
   position: fixed;
   top: 0;
   left: 0;
@@ -18,94 +18,94 @@
   backdrop-filter: blur(30px);
 }
 
-.nova-3d-tabs--visible {
+.bharat-3d-tabs--visible {
   display: flex;
-  animation: nova-fade-in 0.3s var(--nova-ease-smooth) forwards;
+  animation: bharat-fade-in 0.3s var(--bharat-ease-smooth) forwards;
 }
 
-.nova-3d-tabs__header {
+.bharat-3d-tabs__header {
   position: absolute;
-  top: var(--nova-space-xl);
+  top: var(--bharat-space-xl);
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
 }
 
-.nova-3d-tabs__title {
-  font-family: var(--nova-font-display);
-  font-size: var(--nova-text-xl);
+.bharat-3d-tabs__title {
+  font-family: var(--bharat-font-display);
+  font-size: var(--bharat-text-xl);
   font-weight: 700;
-  margin-bottom: var(--nova-space-xs);
+  margin-bottom: var(--bharat-space-xs);
 }
 
-.nova-3d-tabs__count {
-  color: var(--nova-text-tertiary);
-  font-size: var(--nova-text-sm);
+.bharat-3d-tabs__count {
+  color: var(--bharat-text-tertiary);
+  font-size: var(--bharat-text-sm);
 }
 
-.nova-3d-tabs__container {
+.bharat-3d-tabs__container {
   display: flex;
-  gap: var(--nova-space-lg);
+  gap: var(--bharat-space-lg);
   transform-style: preserve-3d;
-  transition: transform 0.5s var(--nova-ease-spring);
-  padding: var(--nova-space-3xl);
+  transition: transform 0.5s var(--bharat-ease-spring);
+  padding: var(--bharat-space-3xl);
 }
 
-.nova-3d-tab-card {
+.bharat-3d-tab-card {
   width: 320px;
   height: 220px;
-  border-radius: var(--nova-radius-xl);
-  background: var(--nova-bg-secondary);
+  border-radius: var(--bharat-radius-xl);
+  background: var(--bharat-bg-secondary);
   border: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.4s var(--nova-ease-spring);
+  transition: all 0.4s var(--bharat-ease-spring);
   transform-style: preserve-3d;
   position: relative;
   flex-shrink: 0;
 }
 
-.nova-3d-tab-card:hover {
+.bharat-3d-tab-card:hover {
   transform: scale(1.08) translateZ(30px);
-  border-color: var(--nova-accent-primary);
+  border-color: var(--bharat-accent-primary);
   box-shadow: 0 20px 60px rgba(108, 92, 231, 0.3);
 }
 
-.nova-3d-tab-card--active {
-  border-color: var(--nova-accent-primary);
+.bharat-3d-tab-card--active {
+  border-color: var(--bharat-accent-primary);
   box-shadow: 0 0 30px rgba(108, 92, 231, 0.3);
 }
 
-.nova-3d-tab-card__preview {
+.bharat-3d-tab-card__preview {
   width: 100%;
   height: 160px;
-  background: var(--nova-bg-tertiary);
+  background: var(--bharat-bg-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 48px;
-  color: var(--nova-text-tertiary);
+  color: var(--bharat-text-tertiary);
   position: relative;
   overflow: hidden;
 }
 
-.nova-3d-tab-card__preview-gradient {
+.bharat-3d-tab-card__preview-gradient {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 40px;
-  background: linear-gradient(transparent, var(--nova-bg-secondary));
+  background: linear-gradient(transparent, var(--bharat-bg-secondary));
 }
 
-.nova-3d-tab-card__info {
-  padding: var(--nova-space-sm) var(--nova-space-md);
+.bharat-3d-tab-card__info {
+  padding: var(--bharat-space-sm) var(--bharat-space-md);
   display: flex;
   align-items: center;
-  gap: var(--nova-space-sm);
+  gap: var(--bharat-space-sm);
 }
 
-.nova-3d-tab-card__favicon {
+.bharat-3d-tab-card__favicon {
   width: 16px;
   height: 16px;
   border-radius: 4px;
@@ -116,66 +116,66 @@
   font-size: 10px;
 }
 
-.nova-3d-tab-card__title {
+.bharat-3d-tab-card__title {
   flex: 1;
-  font-size: var(--nova-text-xs);
+  font-size: var(--bharat-text-xs);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.nova-3d-tab-card__close {
+.bharat-3d-tab-card__close {
   width: 24px;
   height: 24px;
   border-radius: 50%;
   border: none;
   background: transparent;
-  color: var(--nova-text-tertiary);
+  color: var(--bharat-text-tertiary);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  transition: all var(--nova-duration-fast);
+  transition: all var(--bharat-duration-fast);
 }
 
-.nova-3d-tab-card__close:hover {
+.bharat-3d-tab-card__close:hover {
   background: rgba(255, 107, 107, 0.2);
-  color: var(--nova-accent-danger);
+  color: var(--bharat-accent-danger);
 }
 
 /* ── 3D Rotation Modes ── */
-.nova-3d-tabs--carousel .nova-3d-tabs__container {
+.bharat-3d-tabs--carousel .bharat-3d-tabs__container {
   transform-style: preserve-3d;
 }
 
-.nova-3d-tabs--grid .nova-3d-tabs__container {
+.bharat-3d-tabs--grid .bharat-3d-tabs__container {
   flex-wrap: wrap;
   justify-content: center;
   max-width: 80vw;
 }
 
-.nova-3d-tabs--grid .nova-3d-tab-card {
+.bharat-3d-tabs--grid .bharat-3d-tab-card {
   width: 280px;
   height: 200px;
 }
 
 /* ── Tab Stack Visual ── */
-.nova-tab-stack {
+.bharat-tab-stack {
   position: relative;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
 }
 
-.nova-tab-stack__count {
+.bharat-tab-stack__count {
   position: absolute;
   top: -4px;
   right: -4px;
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: var(--nova-accent-primary);
+  background: var(--bharat-accent-primary);
   color: white;
   font-size: 10px;
   display: flex;
@@ -185,74 +185,74 @@
 }
 
 /* ── Tab Group ── */
-.nova-tab-group {
+.bharat-tab-group {
   display: flex;
   align-items: center;
-  border-radius: var(--nova-radius-md);
+  border-radius: var(--bharat-radius-md);
   overflow: hidden;
   margin: 0 2px;
 }
 
-.nova-tab-group__label {
+.bharat-tab-group__label {
   padding: 4px 8px;
   font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-radius: var(--nova-radius-md) 0 0 var(--nova-radius-md);
+  border-radius: var(--bharat-radius-md) 0 0 var(--bharat-radius-md);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.nova-tab-group--purple .nova-tab-group__label {
+.bharat-tab-group--purple .bharat-tab-group__label {
   background: rgba(108, 92, 231, 0.2);
-  color: var(--nova-accent-secondary);
+  color: var(--bharat-accent-secondary);
 }
 
-.nova-tab-group--teal .nova-tab-group__label {
+.bharat-tab-group--teal .bharat-tab-group__label {
   background: rgba(0, 206, 201, 0.2);
-  color: var(--nova-accent-tertiary);
+  color: var(--bharat-accent-tertiary);
 }
 
-.nova-tab-group--pink .nova-tab-group__label {
+.bharat-tab-group--pink .bharat-tab-group__label {
   background: rgba(253, 121, 168, 0.2);
-  color: var(--nova-accent-hot);
+  color: var(--bharat-accent-hot);
 }
 
 /* ── Drag and Drop ── */
-.nova-tab--dragging {
+.bharat-tab--dragging {
   opacity: 0.5;
   transform: scale(0.95);
 }
 
-.nova-tab--drag-over {
-  border-left: 2px solid var(--nova-accent-primary);
+.bharat-tab--drag-over {
+  border-left: 2px solid var(--bharat-accent-primary);
 }
 
-.nova-tab--drop-target {
+.bharat-tab--drop-target {
   background: rgba(108, 92, 231, 0.1);
 }
 
 /* ── Pinned Tabs ── */
-.nova-tab--pinned {
+.bharat-tab--pinned {
   min-width: 40px;
   max-width: 40px;
   padding: 6px;
   justify-content: center;
 }
 
-.nova-tab--pinned .nova-tab__title,
-.nova-tab--pinned .nova-tab__close {
+.bharat-tab--pinned .bharat-tab__title,
+.bharat-tab--pinned .bharat-tab__close {
   display: none;
 }
 
 /* ── Tab Suspension Indicator ── */
-.nova-tab--suspended {
+.bharat-tab--suspended {
   opacity: 0.6;
 }
 
-.nova-tab--suspended .nova-tab__favicon {
+.bharat-tab--suspended .bharat-tab__favicon {
   filter: grayscale(100%);
 }

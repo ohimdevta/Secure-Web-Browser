@@ -1,0 +1,36 @@
+name: Build macOS Installer
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build macOS Installer
+        run: npm run dist -- --mac
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload macOS Installer Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-Installer
+          path: dist/*.dmg
+          if-no-files-found: warn
